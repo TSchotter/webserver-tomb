@@ -4,7 +4,7 @@ title: Index
 nav_order: 0
 ---
 
-# Webserver Class Tome
+# Webserver Class Tomb
 
 This irreverant, sloppy, but interactive textbook wants to teach you how to connect to a remote server, navigate Linux, and set up your development environment. Give it a try.
 
