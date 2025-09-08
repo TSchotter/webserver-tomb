@@ -136,4 +136,4 @@ Now that you understand HTML basics, learn about some [HTML Tags](htmlTags.md) a
 
 ---
 
-*HTML is the foundation of web development. Master it, and you'll have a solid base for building dynamic web applications.*
+*HTML is the foundation of web development. Understanding it is nessessary to have a solid base for building dynamic web applications.*

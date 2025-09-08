@@ -499,6 +499,6 @@ Use tags that describe content meaning:
 
 ## Next Steps
 
-Now that you understand HTML tags, learn about [CSS](CSSstart.md) to style your HTML content.
+Now that you understand HTML tags and how they function, learn about [CSS](CSSstart.md) to style your HTML content.
 
 ---

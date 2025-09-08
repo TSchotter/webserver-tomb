@@ -9,21 +9,16 @@ has_children: true
 
 [&laquo; Return to the Table of Contents](../index.md)
 
-Now that things are set up, it's time to talk a little bit about HTML and CSS. These subchapters will not go deep into these concepts since this is the web
+Now that things are set up, it's time to talk a little bit about HTML and CSS. These subchapters will not go deep into these concepts since this is the web`server` class. But a certain amount of HTML and CSS knowledge will help you understand what sort of information you're frequently providing to the client.
 
-## Setup Steps
+For more information, I highly recommend [w3schools](https://www.w3schools.com/). They have plenty of resources for learning about HTML and CSS tag/style usage.
 
-### 1. [Accessing Server](accessingServer.md)
-Learn how to connect to the remote server using SSH from your terminal. This includes getting your account credentials, verifying your account page exists, and establishing your first connection to the server.
+## HTML and CSS subchapters
 
-### 2. [Basic Linux Navigation](linuxNavigation.md)
-Master essential Linux commands for navigating the file system, managing files, and communicating with other users on the server. Includes file operations, directory navigation, and terminal communication tools.
+### 1. [What is HTML/CSS](whatisHTML.md)
 
-### 3. [VSCode Extension](vsCodeConnection.md)
-Set up VSCode with the Remote SSH extension to connect to the server directly from your IDE. This allows you to edit files, use the integrated terminal, and work seamlessly with your remote development environment.
 
-## Getting Started
+### 2. [Basic HTML](htmlTags.md)
 
-Ready to begin? Start with the first step:
 
-**[Accessing Server →](accessingServer.md)**
+### 3. [Basic CSS](CSSstart.md)
