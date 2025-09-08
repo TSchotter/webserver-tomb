@@ -2,7 +2,7 @@
 layout: default
 title: What is HTML?
 nav_order: 1
-parent: HTML & CSS
+parent: HTML and CSS
 ---
 
 # What is HTML?

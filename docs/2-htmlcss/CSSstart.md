@@ -2,7 +2,7 @@
 layout: default
 title: CSS Basics
 nav_order: 3
-parent: HTML & CSS
+parent: HTML and CSS
 ---
 
 # CSS Basics

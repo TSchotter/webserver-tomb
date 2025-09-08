@@ -2,7 +2,7 @@
 layout: default
 title: HTML Tags
 nav_order: 2
-parent: HTML & CSS
+parent: HTML and CSS
 ---
 
 # HTML Tags
