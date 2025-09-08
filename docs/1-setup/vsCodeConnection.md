@@ -92,7 +92,7 @@ Once connected, it should look like this:
 
 With VSCode properly configured, you're ready to start modifying your HTML page! In the next chapter we'll talk about the basics of HTML and CSS. Just enough so that you understand the format.
 
-*Next Chapter to be developed over the weekend*
+[Basics of HTML and CSS](../2-htmlcss/index.md)
 
 ---
 
