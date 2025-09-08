@@ -15,10 +15,14 @@ For more information, I highly recommend [w3schools](https://www.w3schools.com/)
 
 ## HTML and CSS subchapters
 
-### 1. [What is HTML/CSS](whatisHTML.md)
+### 1. [What is HTML?](whatisHTML.md)
 
+Learn about HTML from a webserver developer's perspective - how information flows from server to client, security considerations, and the request-response cycle.
 
-### 2. [Basic HTML](htmlTags.md)
+### 2. [HTML Tags and Structure](htmlTags.md)
 
+Learn about the essential HTML tags, attributes, and structure needed to create web content that servers deliver to clients.
 
-### 3. [Basic CSS](CSSstart.md)
+### 3. [CSS Basics](CSSstart.md)
+
+Understand CSS fundamentals including selectors, properties, layout techniques, and the priority system for styling web content.
