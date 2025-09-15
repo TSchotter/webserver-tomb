@@ -158,7 +158,7 @@ const helper = require('../utils/helper');   // Relative path
 
 ## Best Practices
 
-### 1. Organize Your Code
+### Organize Your Code
 
 ```
 project/
@@ -174,7 +174,7 @@ project/
 └── node_modules/
 ```
 
-### 2. Use Semantic Versioning
+### Use Semantic Versioning
 
 ```json
 {
@@ -186,7 +186,7 @@ project/
 }
 ```
 
-### 3. Keep Dependencies Updated
+### Keep Dependencies Updated
 
 ```bash
 # Check for outdated packages
