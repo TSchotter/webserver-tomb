@@ -24,7 +24,7 @@ Ready to begin? Start with the setup guide:
 ## HTML & CSS Fundamentals
 
 5. [HTML & CSS Overview](2-htmlcss/index.md)
-6. [What is HTML?](2-htmlcss/whatisHTML.md)
+6. [What is HTML?](2-htmlcss/whatisHTML.md):
 7. [HTML Tags and Structure](2-htmlcss/htmlTags.md)
 8. [CSS Basics](2-htmlcss/CSSstart.md)
 
@@ -32,7 +32,7 @@ Ready to begin? Start with the setup guide:
 
 9. [NodeJS Overview](3-nodejs/index.md)
 10. [What is NodeJS?](3-nodejs/whatisNodeJS.md)
-11. [NodeJS Modules and NPM](3-nodejs/nodejsModules.md)
-12. [Building Your First Server](3-nodejs/firstServer.md)
-13. [File System and Asynchronous Programming](3-nodejs/fileSystem.md)
+11. [Building Your First Server](3-nodejs/firstServer.md)
+12. [NodeJS Modules and NPM](3-nodejs/nodejsModules.md)
+13. [Express.js](3-nodejs/express.md)
 
