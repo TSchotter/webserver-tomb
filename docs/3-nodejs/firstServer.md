@@ -18,6 +18,7 @@ It is highly recommended you create a seperate folder for your nodejs file struc
 ### Basic Server Structure
 
 ```javascript
+{% raw %}
 // server.js
 const http = require('http');
 
@@ -35,6 +36,7 @@ const PORT = 3000;
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+{% endraw %}
 ```
 > ## Class related note
 > 
@@ -89,6 +91,7 @@ Every HTTP response has:
 ### A Larger Example
 
 ```javascript
+{% raw %}
 // server.js
 const http = require('http');
 const url = require('url');
@@ -188,6 +191,7 @@ const PORT = 3030;
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+{% endraw %}
 ```
 
 > ### Important Tip
@@ -202,6 +206,7 @@ server.listen(PORT, () => {
 Error handling is crucial for building reliable web servers. Without proper error handling, your server could crash when something goes wrong, leaving users with no response.
 
 ```javascript
+{% raw %}
 const server = http.createServer((req, res) => {
     try {
         // Your server logic here
@@ -234,6 +239,7 @@ const PORT = 3000;
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+{% endraw %}
 ```
 
 ### What's Happening Here:
