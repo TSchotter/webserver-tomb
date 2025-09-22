@@ -175,7 +175,8 @@ your-project/
 │   │   ├── header.hbs
 │   │   └── footer.hbs
 │   ├── home.hbs
-│   └── user.hbs
+│   ├── user-profile.hbs
+│   └── blog.hbs
 ├── public/
 └── server.js
 ```
@@ -224,7 +225,7 @@ With `hbs`, we'll create a base template that other templates can extend:
 </footer>
 ```
 
-### Example 1: Simple Home Page (`views/home.hbs`)
+### Home Page Template (`views/home.hbs`)
 
 ```html
 {% raw %}
@@ -232,28 +233,56 @@ With `hbs`, we'll create a base template that other templates can extend:
 
 <h1>{{title}}</h1>
 <p>{{message}}</p>
-<p>Welcome to our website!</p>
+<p><a href="/tschotter_node/blog">View Blog</a></p>
 
 {{> footer}}
 {% endraw %}
 ```
 
-### Example 2: User Information Page (`views/user.hbs`)
+### User Profile Template (`views/user-profile.hbs`)
 
 ```html
 {% raw %}
 {{> header}}
 
-<h1>User Profile</h1>
+<h1>{{user.name}}</h1>
+<p>User #{{user.id}}</p>
 
 <div>
-    <p><strong>Name:</strong> {{user.name}}</p>
     <p><strong>Email:</strong> {{user.email}}</p>
     <p><strong>Age:</strong> {{user.age}} years old</p>
     <p><strong>Location:</strong> {{user.city}}</p>
+    <p><strong>Member since:</strong> {{formatDate user.createdAt}}</p>
 </div>
 
-<p><a href="/tschotter_node">← Back to Home</a></p>
+<p><a href="/tschotter_node/users">← Back to Users</a></p>
+
+{{> footer}}
+{% endraw %}
+```
+
+### Blog Template with Loops (`views/blog.hbs`)
+
+```html
+{% raw %}
+{{> header}}
+
+<h1>Latest Blog Posts</h1>
+<p>Stay updated with our latest articles and tutorials</p>
+
+{{#if posts}}
+    {{#each posts}}
+    <article>
+        <h2>{{title}}</h2>
+        <p><strong>By {{author}}</strong> on {{formatDate date}}</p>
+        <p>{{excerpt}}</p>
+        <p><a href="/tschotter_node/post/{{id}}">Read More →</a></p>
+        <hr>
+    </article>
+    {{/each}}
+{{else}}
+    <p>No blog posts available at the moment.</p>
+{{/if}}
 
 {{> footer}}
 {% endraw %}
@@ -263,15 +292,7 @@ With `hbs`, we'll create a base template that other templates can extend:
 
 ```javascript
 {% raw %}
-// Home page route
-app.get('/', (req, res) => {
-    res.render('home', {
-        title: 'Welcome to Our Site',
-        message: 'This is a Handlebars template!'
-    });
-});
-
-// User information route
+// User profile route
 app.get('/user/:id', (req, res) => {
     const userId = parseInt(req.params.id);
     
@@ -281,26 +302,63 @@ app.get('/user/:id', (req, res) => {
             name: 'John Doe', 
             email: 'john@example.com', 
             age: 25, 
-            city: 'New York'
+            city: 'New York',
+            createdAt: '2024-01-15'
         },
         { 
             id: 2, 
             name: 'Jane Smith', 
             email: 'jane@example.com', 
             age: 30, 
-            city: 'Los Angeles'
+            city: 'Los Angeles',
+            createdAt: '2024-02-20'
         }
     ];
     
     const user = users.find(u => u.id === userId);
     
     if (!user) {
-        return res.status(404).send('<h1>User not found</h1>');
+        return res.status(404).render('error', {
+            title: 'User Not Found',
+            message: 'The requested user could not be found.'
+        });
     }
     
-    res.render('user', {
-        title: 'User Profile',
+    res.render('user-profile', {
+        title: user.name + ' - Profile',
         user: user
+    });
+});
+
+// Blog route
+app.get('/blog', (req, res) => {
+    const posts = [
+        { 
+            id: 1, 
+            title: 'Getting Started with Node.js', 
+            author: 'John Doe', 
+            date: '2024-01-15', 
+            excerpt: 'Learn the basics of Node.js development and how to build your first server application.' 
+        },
+        { 
+            id: 2, 
+            title: 'Express.js Best Practices', 
+            author: 'Jane Smith', 
+            date: '2024-01-20', 
+            excerpt: 'Discover the best practices for building robust and scalable Express applications.' 
+        },
+        { 
+            id: 3, 
+            title: 'Database Design Patterns', 
+            author: 'Bob Johnson', 
+            date: '2024-01-25', 
+            excerpt: 'Explore common database design patterns and when to use each one in your applications.' 
+        }
+    ];
+    
+    res.render('blog', {
+        title: 'Blog',
+        posts: posts
     });
 });
 {% endraw %}
