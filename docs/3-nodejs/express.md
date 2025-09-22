@@ -28,7 +28,6 @@ This will add Express to your `package.json` dependencies and create a `node_mod
 Here is an extremely basic Express server to make sure everything is functioning:
 
 ```javascript
-{% raw %}
 // server.js
 const express = require('express');
 const app = express();
@@ -61,7 +60,6 @@ One of Express's most useful features is serving static files. This is much easi
 ### Setting Up Static File Serving
 
 ```javascript
-{% raw %}
 // server.js
 const express = require('express');
 const path = require('path');
