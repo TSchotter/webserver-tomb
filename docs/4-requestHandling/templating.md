@@ -44,7 +44,7 @@ function renderTemplate(template, data) {
     
     // Replace placeholders with data
     for (const key in data) {
-        const placeholder = `{{${key}}}`;
+        const placeholder = `{{` + key + `}}`;
         const value = data[key] || '';
         html = html.replace(new RegExp(placeholder, 'g'), value);
     }
@@ -89,6 +89,7 @@ app.listen(PORT, () => {
 
 **Template file (`templates/user-profile.html`):**
 ```html
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,6 +181,7 @@ your-project/
 With `hbs`, we'll create a base template that other templates can extend:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -195,6 +197,7 @@ With `hbs`, we'll create a base template that other templates can extend:
     {{> footer}}
 </body>
 </html>
+{% endraw %}
 ```
 
 ### Header Partial (`views/partials/header.hbs`)
@@ -220,6 +223,7 @@ With `hbs`, we'll create a base template that other templates can extend:
 ### Home Page Template (`views/home.hbs`)
 
 ```html
+{% raw %}
 {{> header}}
 
 <h1>{{title}}</h1>
@@ -227,11 +231,13 @@ With `hbs`, we'll create a base template that other templates can extend:
 <p><a href="/blog">View Blog</a></p>
 
 {{> footer}}
+{% endraw %}
 ```
 
 ### User Profile Template (`views/user-profile.hbs`)
 
 ```html
+{% raw %}
 {{> header}}
 
 <h1>{{user.name}}</h1>
@@ -247,11 +253,13 @@ With `hbs`, we'll create a base template that other templates can extend:
 <p><a href="/users">← Back to Users</a></p>
 
 {{> footer}}
+{% endraw %}
 ```
 
 ### Blog Template with Loops (`views/blog.hbs`)
 
 ```html
+{% raw %}
 {{> header}}
 
 <h1>Latest Blog Posts</h1>
@@ -272,6 +280,7 @@ With `hbs`, we'll create a base template that other templates can extend:
 {{/if}}
 
 {{> footer}}
+{% endraw %}
 ```
 
 ### Server Routes with Handlebars
@@ -310,7 +319,7 @@ app.get('/user/:id', (req, res) => {
     }
     
     res.render('user-profile', {
-        title: `${user.name} - Profile`,
+        title: user.name + ' - Profile',
         user: user
     });
 });
@@ -385,26 +394,32 @@ Here's how these helpers are used in your Handlebars templates:
 
 **Using the `formatDate` helper:**
 ```html
+{% raw %}
 <!-- In your template -->
 <p>Published on: {{formatDate post.date}}</p>
 <!-- Output: Published on: January 15, 2024 -->
+{% endraw %}
 ```
 
 **Using the `capitalize` helper:**
 ```html
+{% raw %}
 <!-- In your template -->
 <h1>Welcome, {{capitalize user.name}}!</h1>
 <!-- If user.name is "john doe", output: Welcome, John doe! -->
+{% endraw %}
 ```
 
 **Using the `ifEquals` helper:**
 ```html
+{% raw %}
 <!-- In your template -->
 {{#ifEquals user.role "admin"}}
     <p>You have admin privileges</p>
 {{else}}
     <p>You are a regular user</p>
 {{/ifEquals}}
+{% endraw %}
 ```
 
 **Using the `times` helper:**
