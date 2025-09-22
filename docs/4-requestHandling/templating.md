@@ -170,115 +170,48 @@ your-project/
 │   ├── partials/
 │   │   ├── header.hbs
 │   │   └── footer.hbs
-│   ├── home.hbs
-│   ├── user-profile.hbs
-│   └── blog.hbs
+│   └── user.hbs
 ├── public/
 └── server.js
 ```
 
-### Base Template (`views/layout.hbs`)
-
-With `hbs`, we'll create a base template that other templates can extend:
-
-```html
-{% raw %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{title}} - My Website</title>
-</head>
-<body>
-    {{> header}}
-    
-    <main>
-        {{{body}}}
-    </main>
-    
-    {{> footer}}
-</body>
-</html>
-{% endraw %}
-```
 
 ### Header Partial (`views/partials/header.hbs`)
 
 ```html
+{% raw %}
 <header>
     <nav>
-        <a href="/">Home</a> |
-        <a href="/blog">Blog</a> |
-        <a href="/users">Users</a>
+        <a href="/tschotter_node/">Home</a>
     </nav>
 </header>
+{% endraw %}
 ```
 
 ### Footer Partial (`views/partials/footer.hbs`)
 
 ```html
-<footer>
-    <p>&copy; 2024 My Website. All rights reserved.</p>
-</footer>
-```
-
-### Home Page Template (`views/home.hbs`)
-
-```html
 {% raw %}
-{{> header}}
-
-<h1>{{title}}</h1>
-<p>{{message}}</p>
-<p><a href="/blog">View Blog</a></p>
-
-{{> footer}}
+<footer>
+    <p>&copy; 2024 My Website</p>
+</footer>
 {% endraw %}
 ```
 
-### User Profile Template (`views/user-profile.hbs`)
+### User Information Page (`views/user.hbs`)
 
 ```html
 {% raw %}
 {{> header}}
 
-<h1>{{user.name}}</h1>
-<p>User #{{user.id}}</p>
+<h1>User Information</h1>
 
 <div>
+    <p><strong>Name:</strong> {{user.name}}</p>
     <p><strong>Email:</strong> {{user.email}}</p>
-    <p><strong>Age:</strong> {{user.age}} years old</p>
-    <p><strong>Location:</strong> {{user.city}}</p>
-    <p><strong>Member since:</strong> {{formatDate user.createdAt}}</p>
+    <p><strong>Age:</strong> {{user.age}}</p>
+    <p><strong>City:</strong> {{user.city}}</p>
 </div>
-
-<p><a href="/users">← Back to Users</a></p>
-
-{{> footer}}
-{% endraw %}
-```
-
-### Blog Template with Loops (`views/blog.hbs`)
-
-```html
-{% raw %}
-{{> header}}
-
-<h1>Latest Blog Posts</h1>
-<p>Stay updated with our latest articles and tutorials</p>
-
-{{#if posts}}
-    {{#each posts}}
-    <article>
-        <h2>{{title}}</h2>
-        <p><strong>By {{author}}</strong> on {{formatDate date}}</p>
-        <p>{{excerpt}}</p>
-        <p><a href="/post/{{id}}">Read More →</a></p>
-        <hr>
-    </article>
-    {{/each}}
-{{else}}
-    <p>No blog posts available at the moment.</p>
-{{/if}}
 
 {{> footer}}
 {% endraw %}
@@ -287,7 +220,7 @@ With `hbs`, we'll create a base template that other templates can extend:
 ### Server Routes with Handlebars
 
 ```javascript
-// User profile route
+// User information route
 app.get('/user/:id', (req, res) => {
     const userId = parseInt(req.params.id);
     
@@ -297,63 +230,26 @@ app.get('/user/:id', (req, res) => {
             name: 'John Doe', 
             email: 'john@example.com', 
             age: 25, 
-            city: 'New York',
-            createdAt: '2024-01-15'
+            city: 'New York'
         },
         { 
             id: 2, 
             name: 'Jane Smith', 
             email: 'jane@example.com', 
             age: 30, 
-            city: 'Los Angeles',
-            createdAt: '2024-02-20'
+            city: 'Los Angeles'
         }
     ];
     
     const user = users.find(u => u.id === userId);
     
     if (!user) {
-        return res.status(404).render('error', {
-            title: 'User Not Found',
-            message: 'The requested user could not be found.'
-        });
+        return res.status(404).send('<h1>User not found</h1>');
     }
     
-    res.render('user-profile', {
-        title: user.name + ' - Profile',
+    res.render('user', {
+        title: 'User Information',
         user: user
-    });
-});
-
-// Blog route
-app.get('/blog', (req, res) => {
-    const posts = [
-        { 
-            id: 1, 
-            title: 'Getting Started with Node.js', 
-            author: 'John Doe', 
-            date: '2024-01-15', 
-            excerpt: 'Learn the basics of Node.js development and how to build your first server application.' 
-        },
-        { 
-            id: 2, 
-            title: 'Express.js Best Practices', 
-            author: 'Jane Smith', 
-            date: '2024-01-20', 
-            excerpt: 'Discover the best practices for building robust and scalable Express applications.' 
-        },
-        { 
-            id: 3, 
-            title: 'Database Design Patterns', 
-            author: 'Bob Johnson', 
-            date: '2024-01-25', 
-            excerpt: 'Explore common database design patterns and when to use each one in your applications.' 
-        }
-    ];
-    
-    res.render('blog', {
-        title: 'Blog',
-        posts: posts
     });
 });
 ```
