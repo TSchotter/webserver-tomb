@@ -44,7 +44,7 @@ function renderTemplate(template, data) {
     
     // Replace placeholders with data
     for (const key in data) {
-        const placeholder = `{{` + key + `}}`;
+        const placeholder = '{{' + key + '}}';
         const value = data[key] || '';
         html = html.replace(new RegExp(placeholder, 'g'), value);
     }
@@ -83,13 +83,13 @@ app.get('/user/:id', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://toastcode.net/tschotter_node`);
+    console.log('Server running on http://toastcode.net/tschotter_node');
 });
 ```
 
 **Template file (`templates/user-profile.html`):**
 ```html
-
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,6 +109,7 @@ app.listen(PORT, () => {
     <p><a href="/">← Back to Home</a></p>
 </body>
 </html>
+{% endraw %}
 ```
 > As you can see, the templating uses regular expressions to find and replace values. A helper function is used in the example to partially automate the process based on the json object sent to it.
 
@@ -155,7 +156,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://toastcode.net/tschotter_node`);
+    console.log('Server running on http://toastcode.net/tschotter_node');
 });
 ```
 
@@ -424,11 +425,13 @@ Here's how these helpers are used in your Handlebars templates:
 
 **Using the `times` helper:**
 ```html
+{% raw %}
 <!-- In your template -->
 {{#times 5}}
     <p>Star {{this}}</p>
 {{/times}}
 <!-- Output: 5 paragraphs with "Star 0", "Star 1", etc. -->
+{% endraw %}
 ```
 
 ## Benefits of Using Handlebars
