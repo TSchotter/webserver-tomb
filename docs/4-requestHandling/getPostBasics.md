@@ -62,7 +62,6 @@ When you submit a contact form, the form data (name, email, message) is sent in 
 There is not too much difference between a GET route and a POST route in your code. One thing to note is, since they are different methods, you can have them share url paths as seen below:
 
 ```javascript
-{% raw %}
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -81,7 +80,6 @@ app.post('/hello', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://toastcode.net/tschotter_node`);
 });
-{% endraw %}
 ```
 
 The primary difference is just using ```.post``` instead of ```.get``` to denote that the callback function will be run when that method (GET or POST) is attached to the proper url.
@@ -106,7 +104,6 @@ app.get('/search', (req, res) => {
         <p>Page: ${page}</p>
     `);
 });
-{% endraw %}
 ```
 
 **What happens:**
@@ -132,7 +129,6 @@ app.get('/search', (req, res) => {
         <p>Page: ${page}</p>               <!-- Will show "undefined" -->
     `);
 });
-{% endraw %}
 ```
 
 **Result in browser:**
@@ -160,7 +156,6 @@ app.get('/search', (req, res) => {
         <p>Page: ${page}</p>
     `);
 });
-{% endraw %}
 ```
 In the above example, what is happening is if ```req.query.q``` is "undefined", it is effectively the same as saying it's "false" in a logical check. So by using the ```or``` operation (```||```), you can assign a default value if the GET request didn't include it.
 
@@ -193,7 +188,6 @@ app.post('/submit', (req, res) => {
         <p>Email: ${email}</p>
     `);
 });
-{% endraw %}
 ```
 
 ## More Complicated Examples
@@ -201,7 +195,6 @@ app.post('/submit', (req, res) => {
 ### Example 1: Simple Search API
 
 ```javascript
-{% raw %}
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -246,13 +239,11 @@ app.listen(PORT, () => {
     console.log(`Server running on http://toastcode.net/tschotter_node`);
     console.log('Try: http://toastcode.net/tschotter_node/api/products?category=Electronics&minPrice=500');
 });
-{% endraw %}
 ```
 
 ### Example 2: User Registration
 
 ```javascript
-{% raw %}
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -324,7 +315,6 @@ app.get('/api/users/:id', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://toastcode.net/tschotter_node`);
 });
-{% endraw %}
 ```
 
 ## Redirecting to Static HTML Pages
@@ -336,7 +326,6 @@ Instead of sending HTML directly in your responses, you can redirect the client 
 First, create a `public` directory and add the middleware to serve static files:
 
 ```javascript
-{% raw %}
 const express = require('express');
 const path = require('path');
 const app = express();

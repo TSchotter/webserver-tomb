@@ -28,7 +28,6 @@ These languages typically handle one request per thread, which can become expens
 NodeJS takes a different approach:
 
 ```javascript
-{% raw %}
 // Traditional blocking approach (conceptual)
 function handleRequest() {
     var data = readFileSync('large-file.txt'); // Blocks here

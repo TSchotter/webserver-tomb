@@ -42,7 +42,6 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Express server running on http://localhost:${PORT}`);
 });
-{% endraw %}
 ```
 
 Much simpler than our previous NodeJS server! Let's break down what's happening:
@@ -78,7 +77,6 @@ app.listen(PORT, () => {
     console.log(`Express server running on http://localhost:${PORT}`);
     console.log('Serving static files from the "public" directory');
 });
-{% endraw %}
 ```
 
 ### File Structure for Static Files
@@ -119,7 +117,6 @@ This cuts out some of the busywork that would otherwise need to be handled by yo
 Express makes it easy to create different routes for different parts of your application:
 
 ```javascript
-{% raw %}
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -155,7 +152,6 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`Express server running on http://localhost:${PORT}`);
 });
-{% endraw %}
 ```
 > The above can be combined with the ```app.use(express.static('public'));``` so that you will redirect clients to static pages if you don't have a specific route.
 
@@ -167,7 +163,6 @@ app.listen(PORT, () => {
 Middleware are functions that run between the request and response. Express comes with built-in middleware and you can create your own:
 
 ```javascript
-{% raw %}
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -194,7 +189,6 @@ app.post('/api/data', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Express server running on http://localhost:${PORT}`);
 });
-{% endraw %}
 ```
 > The middleware above will intercept every request and ```console.log``` the date/time, method, and req url before moving on to the next applicible method.
 

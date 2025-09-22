@@ -27,7 +27,6 @@ Before diving into templating engines, let's understand the fundamentals using b
 The most basic form of templating is string replacement:
 
 ```javascript
-{% raw %}
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -86,7 +85,6 @@ app.get('/user/:id', (req, res) => {
 app.listen(PORT, () => {
     console.log('Server running on http://toastcode.net/tschotter_node');
 });
-{% endraw %}
 ```
 
 **Template file (`templates/user-profile.html`):**
@@ -131,7 +129,6 @@ npm install hbs
 ### Setting Up Handlebars with Express
 
 ```javascript
-{% raw %}
 const express = require('express');
 const hbs = require('hbs');
 const path = require('path');
@@ -161,7 +158,6 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log('Server running on http://toastcode.net/tschotter_node');
 });
-{% endraw %}
 ```
 
 ### Directory Structure
@@ -291,7 +287,6 @@ With `hbs`, we'll create a base template that other templates can extend:
 ### Server Routes with Handlebars
 
 ```javascript
-{% raw %}
 // User profile route
 app.get('/user/:id', (req, res) => {
     const userId = parseInt(req.params.id);
@@ -361,7 +356,6 @@ app.get('/blog', (req, res) => {
         posts: posts
     });
 });
-{% endraw %}
 ```
 
 ### Handlebars Helpers
@@ -369,7 +363,6 @@ app.get('/blog', (req, res) => {
 Handlebars allows you to create custom helpers for more complex logic:
 
 ```javascript
-{% raw %}
 // Register custom helpers
 hbs.registerHelper('formatDate', function(date) {
     return new Date(date).toLocaleDateString('en-US', {
@@ -394,7 +387,6 @@ hbs.registerHelper('times', function(n, block) {
     }
     return accum;
 });
-{% endraw %}
 ```
 
 ### Using Helpers in Templates

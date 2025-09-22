@@ -18,7 +18,6 @@ NodeJS uses a module system to organize code into reusable pieces. This helps ke
 NodeJS comes with many built-in modules that you can use without installing anything:
 
 ```javascript
-{% raw %}
 // File system operations
 const fs = require('fs');
 
@@ -30,7 +29,6 @@ const url = require('url');
 
 // Path manipulation
 const path = require('path');
-{% endraw %}
 ```
 
 ### Creating Your Own Modules
@@ -56,7 +54,6 @@ module.exports = {
 // Or export individual functions
 module.exports.add = add;
 module.exports.subtract = subtract;
-{% endraw %}
 ```
 
 ### Using Your Modules
@@ -71,7 +68,6 @@ console.log(math.subtract(10, 4)); // 6
 // Or destructure the imports
 const { add, subtract } = require('./math');
 console.log(add(5, 3));
-{% endraw %}
 ```
 
 ## NPM: Node Package Manager
@@ -152,13 +148,11 @@ NodeJS looks for modules in this order:
 3. **node_modules directory** (installed packages)
 
 ```javascript
-{% raw %}
 // These are all valid require statements
 const fs = require('fs');                    // Built-in module
 const math = require('./math');              // Local file (the './' means current directory)
 const express = require('express');          // Installed package
 const helper = require('../utils/helper');   // Relative path
-{% endraw %}
 ```
 
 
@@ -207,7 +201,6 @@ npm update
 Let's create a simple utility module for our web server with some functions:
 
 ```javascript
-{% raw %}
 // utils/helpers.js
 const fs = require('fs');
 
@@ -252,11 +245,9 @@ module.exports = {
     fileExists: fileExists,
     getRandomNumber: getRandomNumber
 };
-{% endraw %}
 ```
 
 ```javascript
-{% raw %}
 // server.js
 const helpers = require('./utils/helpers');
 
@@ -272,7 +263,6 @@ console.log('package.json exists:', hasFile);
 
 const randomNum = helpers.getRandomNumber(1, 100);
 console.log('Random number:', randomNum);
-{% endraw %}
 ```
 
 ## Next Steps
