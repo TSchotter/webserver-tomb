@@ -108,7 +108,7 @@ app.listen(PORT, () => {
         <p><strong>User ID:</strong> #{{id}}</p>
     </div>
     
-    <p><a href="/">← Back to Home</a></p>
+    <p><a href="/tschotter_node">← Back to Home</a></p>
 </body>
 </html>
 {% endraw %}
@@ -210,9 +210,9 @@ With `hbs`, we'll create a base template that other templates can extend:
 ```html
 <header>
     <nav>
-        <a href="/">Home</a> |
-        <a href="/blog">Blog</a> |
-        <a href="/users">Users</a>
+        <a href="/tschotter_node">Home</a> |
+        <a href="/tschotter_node/blog">Blog</a> |
+        <a href="/tschotter_node/users">Users</a>
     </nav>
 </header>
 ```
@@ -233,7 +233,7 @@ With `hbs`, we'll create a base template that other templates can extend:
 
 <h1>{{title}}</h1>
 <p>{{message}}</p>
-<p><a href="/blog">View Blog</a></p>
+<p><a href="/tschotter_node/blog">View Blog</a></p>
 
 {{> footer}}
 {% endraw %}
@@ -255,7 +255,7 @@ With `hbs`, we'll create a base template that other templates can extend:
     <p><strong>Member since:</strong> {{formatDate user.createdAt}}</p>
 </div>
 
-<p><a href="/users">← Back to Users</a></p>
+<p><a href="/tschotter_node/users">← Back to Users</a></p>
 
 {{> footer}}
 {% endraw %}
@@ -276,7 +276,7 @@ With `hbs`, we'll create a base template that other templates can extend:
         <h2>{{title}}</h2>
         <p><strong>By {{author}}</strong> on {{formatDate date}}</p>
         <p>{{excerpt}}</p>
-        <p><a href="/post/{{id}}">Read More →</a></p>
+        <p><a href="/tschotter_node/post/{{id}}">Read More →</a></p>
         <hr>
     </article>
     {{/each}}
