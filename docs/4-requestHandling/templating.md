@@ -254,6 +254,191 @@ app.get('/user/:id', (req, res) => {
 });
 ```
 
+### Using Variables in Handlebars
+
+Handlebars provides several ways to work with variables in your templates. Understanding these different approaches will help you create more dynamic and flexible templates.
+
+#### 1. Basic Variable Output
+
+The simplest way to use variables is with double curly braces:
+
+```handlebars
+{% raw %}
+<!-- In your template -->
+<h1>{{title}}</h1>
+<p>Welcome, {{user.name}}!</p>
+<p>Your email is: {{user.email}}</p>
+{% endraw %}
+```
+
+#### 2. Passing Variables to Partials
+
+When including partials, you can pass specific variables to them:
+
+```handlebars
+{% raw %}
+<!-- In your main template -->
+{{> header title="Welcome to Our Site" currentPage="home"}}
+{% endraw %}
+```
+
+Then in your `header.hbs` partial:
+```handlebars
+{% raw %}
+<header>
+    <h1>{{title}}</h1>
+    <nav>
+        <a href="/" {{#ifEquals currentPage "home"}}class="active"{{/ifEquals}}>Home</a>
+        <a href="/about" {{#ifEquals currentPage "about"}}class="active"{{/ifEquals}}>About</a>
+        <a href="/contact" {{#ifEquals currentPage "contact"}}class="active"{{/ifEquals}}>Contact</a>
+    </nav>
+</header>
+{% endraw %}
+```
+
+#### 3. Using Context Variables
+
+Variables from your route's context are automatically available in partials:
+
+```javascript
+// In your route
+app.get('/dashboard', (req, res) => {
+    res.render('dashboard', {
+        pageTitle: 'User Dashboard',
+        user: { 
+            name: 'John Doe', 
+            role: 'admin',
+            lastLogin: '2024-01-15'
+        },
+        stats: {
+            totalPosts: 25,
+            followers: 150
+        }
+    });
+});
+```
+
+```handlebars
+{% raw %}
+<!-- In dashboard.hbs -->
+{{> header}}
+
+<div class="dashboard">
+    <h2>{{pageTitle}}</h2>
+    <p>Hello, {{user.name}}! ({{user.role}})</p>
+    <p>Last login: {{user.lastLogin}}</p>
+    
+    <div class="stats">
+        <p>Posts: {{stats.totalPosts}}</p>
+        <p>Followers: {{stats.followers}}</p>
+    </div>
+</div>
+{% endraw %}
+```
+
+#### 4. Using @root for Global Context
+
+If you need to access the root context from within a partial, use `@root`:
+
+```handlebars
+{% raw %}
+<!-- In header.hbs partial -->
+<header>
+    <h1>{{@root.siteName}}</h1>
+    <nav>
+        {{#each @root.navigationItems}}
+            <a href="{{url}}" {{#ifEquals @root.currentPage name}}class="active"{{/ifEquals}}>
+                {{label}}
+            </a>
+        {{/each}}
+    </nav>
+</header>
+{% endraw %}
+```
+
+#### 5. Conditional Variables
+
+Use variables in conditional statements:
+
+```handlebars
+{% raw %}
+{{#if user.isLoggedIn}}
+    <p>Welcome back, {{user.name}}!</p>
+    <a href="/logout">Logout</a>
+{{else}}
+    <p>Please <a href="/login">login</a> to continue.</p>
+{{/if}}
+
+{{#if user.role}}
+    <p>Your role: {{user.role}}</p>
+{{/if}}
+{% endraw %}
+```
+
+#### 6. Looping Through Variables
+
+Iterate over arrays and objects:
+
+```handlebars
+{% raw %}
+<!-- Loop through an array -->
+<h3>Recent Posts:</h3>
+{{#each posts}}
+    <div class="post">
+        <h4>{{title}}</h4>
+        <p>{{content}}</p>
+        <small>By {{author}} on {{date}}</small>
+    </div>
+{{/each}}
+
+<!-- Loop with index -->
+{{#each menuItems}}
+    <li class="item-{{@index}}">{{this}}</li>
+{{/each}}
+{% endraw %}
+```
+
+#### 7. Nested Object Access
+
+Access nested properties using dot notation:
+
+```handlebars
+{% raw %}
+<p>User: {{user.profile.firstName}} {{user.profile.lastName}}</p>
+<p>Address: {{user.address.street}}, {{user.address.city}}</p>
+<p>Settings: {{user.settings.theme}} theme, {{user.settings.language}} language</p>
+{% endraw %}
+```
+
+#### 8. Default Values
+
+Provide fallback values when variables might be undefined:
+
+```handlebars
+{% raw %}
+<p>Name: {{user.name "Guest"}}</p>
+<p>Theme: {{user.settings.theme "light"}}</p>
+{% endraw %}
+```
+
+Or use the `or` helper (if you create one):
+
+```javascript
+{% raw %}
+// Register a helper for default values
+hbs.registerHelper('or', function(value, defaultValue) {
+    return value || defaultValue;
+});
+{% endraw %}
+```
+
+```handlebars
+{% raw %}
+<p>Name: {{or user.name "Guest"}}</p>
+<p>Theme: {{or user.settings.theme "light"}}</p>
+{% endraw %}
+```
+
 ### Handlebars Helpers
 
 Handlebars allows you to create custom helpers for more complex logic:

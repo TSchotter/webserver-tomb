@@ -15,6 +15,10 @@ In this chapter, we'll cover the fundamentals of request handling:
 1. **[GET and POST Basics](getPostBasics.md)** - Understanding the difference between GET and POST requests and how to handle them on the server
 2. **[Templating](templating.md)** - Creating dynamic HTML templates with basic techniques and Handlebars
 
+## Practice Exercises
+
+**[In-Class Exercises](exercises.md)** - Hands-on exercises to practice the concepts covered in this chapter
+
 
 ## Prerequisites
 
