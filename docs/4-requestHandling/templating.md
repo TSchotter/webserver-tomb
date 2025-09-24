@@ -338,8 +338,61 @@ app.get('/dashboard', (req, res) => {
 
 #### 4. Using @root for Global Context
 
-If you need to access the root context from within a partial, use `@root`:
+The `@root` context is a special Handlebars variable that gives you access to the original data passed to your template, even when you're inside loops or partials where the context might have changed.
 
+**Why do you need @root?**
+
+When you're inside a `{{#each}}` loop or a partial, Handlebars changes the context (the available variables). The `@root` variable always points back to the original data you passed to `res.render()`.
+
+**Example without @root (problematic):**
+```javascript
+// In your route
+app.get('/blog', (req, res) => {
+    res.render('blog', {
+        siteName: 'My Blog',
+        currentPage: 'blog',
+        posts: [
+            { title: 'Post 1', author: 'John' },
+            { title: 'Post 2', author: 'Jane' }
+        ]
+    });
+});
+```
+
+```handlebars
+{% raw %}
+<!-- In blog.hbs -->
+{{> header}}
+
+{{#each posts}}
+    <div class="post">
+        <h3>{{title}}</h3>
+        <p>By {{author}}</p>
+        <!-- This won't work! siteName and currentPage are not available here -->
+        <p>Site: {{siteName}}</p>
+    </div>
+{{/each}}
+{% endraw %}
+```
+
+**Example with @root (correct):**
+```handlebars
+{% raw %}
+<!-- In blog.hbs -->
+{{> header}}
+
+{{#each posts}}
+    <div class="post">
+        <h3>{{title}}</h3>
+        <p>By {{author}}</p>
+        <!-- Now this works! @root gives us access to the original context -->
+        <p>Site: {{@root.siteName}}</p>
+    </div>
+{{/each}}
+{% endraw %}
+```
+
+**In partials, @root is especially useful:**
 ```handlebars
 {% raw %}
 <!-- In header.hbs partial -->
@@ -355,6 +408,11 @@ If you need to access the root context from within a partial, use `@root`:
 </header>
 {% endraw %}
 ```
+
+**Think of @root as:**
+- `@root` = the original data you passed to `res.render()`
+- `this` = the current context (changes in loops and partials)
+- `@root` = your "escape hatch" back to the original data
 
 #### 5. Conditional Variables
 
