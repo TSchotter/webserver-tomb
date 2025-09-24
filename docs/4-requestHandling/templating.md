@@ -83,7 +83,7 @@ app.get('/user/:id', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log('Server running on http://toastcode.net/tschotter_node');
+    console.log(`Server running on ${PORT}`);
 });
 ```
 
