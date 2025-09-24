@@ -170,11 +170,50 @@ your-project/
 │   ├── partials/
 │   │   ├── header.hbs
 │   │   └── footer.hbs
+│   ├── home.hbs
 │   └── user.hbs
 ├── public/
 └── server.js
 ```
 
+### Home Page Template (`views/home.hbs`)
+
+```html
+{% raw %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    {{> header}}
+
+    <main>
+        <h1>{{title}}</h1>
+        <p>{{message}}</p>
+        
+        <div>
+            <h2>Welcome to Our Website</h2>
+            <p>This is a simple example of how Handlebars templating works.</p>
+            
+            <div>
+                <h3>Features:</h3>
+                <ul>
+                    <li>Dynamic content rendering</li>
+                    <li>Reusable partials</li>
+                    <li>Clean template syntax</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    {{> footer}}
+</body>
+</html>
+{% endraw %}
+```
 
 ### Header Partial (`views/partials/header.hbs`)
 
@@ -202,18 +241,30 @@ your-project/
 
 ```html
 {% raw %}
-{{> header}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    {{> header}}
 
-<h1>User Information</h1>
+    <main>
+        <h1>User Information</h1>
 
-<div>
-    <p><strong>Name:</strong> {{user.name}}</p>
-    <p><strong>Email:</strong> {{user.email}}</p>
-    <p><strong>Age:</strong> {{user.age}}</p>
-    <p><strong>City:</strong> {{user.city}}</p>
-</div>
+        <div>
+            <p><strong>Name:</strong> {{user.name}}</p>
+            <p><strong>Email:</strong> {{user.email}}</p>
+            <p><strong>Age:</strong> {{user.age}}</p>
+            <p><strong>City:</strong> {{user.city}}</p>
+        </div>
+    </main>
 
-{{> footer}}
+    {{> footer}}
+</body>
+</html>
 {% endraw %}
 ```
 
