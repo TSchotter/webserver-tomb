@@ -194,19 +194,6 @@ your-project/
         <h1>{{title}}</h1>
         <p>{{message}}</p>
         
-        <div>
-            <h2>Welcome to Our Website</h2>
-            <p>This is a simple example of how Handlebars templating works.</p>
-            
-            <div>
-                <h3>Features:</h3>
-                <ul>
-                    <li>Dynamic content rendering</li>
-                    <li>Reusable partials</li>
-                    <li>Clean template syntax</li>
-                </ul>
-            </div>
-        </div>
     </main>
 
     {{> footer}}
