@@ -60,7 +60,7 @@ app.use(express.static('public'));
 // Your routes here
 
 app.listen(PORT, () => {
-    console.log('Server running on ${PORT}');
+    console.log(`Server running on ${PORT}`);
 });
 ```
 
