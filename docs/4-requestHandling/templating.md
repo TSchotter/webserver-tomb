@@ -632,6 +632,6 @@ Here's how these helpers are used in your Handlebars templates:
 
 ## Next Steps
 
-Now that you understand templating with both basic techniques and Handlebars, you have the foundation to create dynamic HTML pages that respond to user input. The remaining chapters on forms, validation, and filesystem operations will be available soon.
+Now that you understand templating with both basic techniques and Handlebars, you have the foundation to create dynamic HTML pages that respond to user input. Next, you'll learn how to create forms and handle form submissions.
 
-**[Return to Request Handling Chapter →](index.md)**
+**[Next: Forms →](forms.md)** | **[Return to Request Handling Chapter →](index.md)**
