@@ -14,15 +14,15 @@ parent: Request Handling
 Forms are the primary way users interact with web applications by submitting data to servers. Understanding how to create HTML forms and handle form submissions on the server side is essential for building interactive web applications.
 
 In this chapter, we'll cover:
-1. **HTML form elements** - The building blocks of forms
-2. **Form submission methods** - GET vs POST for forms
-3. **Server-side form handling** - Processing form data with Express
-4. **Form validation** - Basic client and server-side validation
-5. **Best practices** - Security and user experience considerations
+- **HTML form elements** - The building blocks of forms
+- **Form submission methods** - GET vs POST
+- **Server-side form handling** - Processing form data with Express
+- **Form validation** - Basic client and server-side validation
+- **Best practices** - Some basic security and user experience considerations
 
 ## HTML Form Elements
 
-Before we can handle forms on the server, we need to understand the HTML elements that make up forms.
+While this chapter is not going to go in depth into the form elements, there is a certain level of base knowledge that is necessary to be capable of using forms (even if we don't end up ever writing them from scratch)
 
 ### Basic Form Structure
 
@@ -116,6 +116,9 @@ Every form starts with a `<form>` element that defines how and where the data wi
 <button type="reset">Reset Form</button>
 ```
 
+> All of these are built into html and you don't need any special css or javascript to give them functionality. It **IS** recommended that you have css styling them the way you want though.
+
+
 ### Simple Form Example
 
 Here's a basic contact form with just two fields:
@@ -124,17 +127,7 @@ Here's a basic contact form with just two fields:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 400px; margin: 0 auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-        button { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-    </style>
 </head>
 <body>
     <h1>Contact Us</h1>
@@ -155,6 +148,12 @@ Here's a basic contact form with just two fields:
 </body>
 </html>
 ```
+
+> Some aspects that might look unfamiliar.
+>
+> - labels are effectively text that is attached to input fields. This is useful for accessibility rather than just having a standard text field.
+> - When an input field has "required" in the tag, it doesn't allow the client to hit the submit button without having it filled. *This does not mean it's not possible to have the data sent to the server*. Since this is a form of validation that is on the HTML page, it's a form of validation that the client can modify.
+> - The placeholder attribute shows text in the input field before the user types something in.
 
 ## Form Submission Methods
 
@@ -218,10 +217,7 @@ app.use(express.json());
 // Serve static files (for our HTML forms)
 app.use(express.static('public'));
 
-// Routes
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// Insert request handling callback functions here.
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
@@ -257,7 +253,7 @@ app.get('/search', (req, res) => {
         );
     }
     
-    // Send results as HTML
+    // Send results as HTML (modify this to suit your needs)
     res.send(`
         <h1>Search Results</h1>
         <p>Searching for: "${query}" in category "${category}"</p>
@@ -320,13 +316,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// In-memory storage (use database in production)
+// In-memory storage (we'll be covering how to use databases instead)
+
 let contacts = [];
 
-// Home page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
 // Handle search form (GET)
 app.get('/search', (req, res) => {
@@ -461,10 +454,14 @@ HTML5 provides built-in validation attributes:
     <button type="submit">Submit</button>
 </form>
 ```
+> ### SECURITY NOTE
+>
+> Always consider any form of client-side validation with the goal of making the site more user-friendly. It should never be considered true validation.
+>
+> True validation of information must be done on the server.
 
 ### Server-Side Validation
 
-Always validate on the server, even if you have client-side validation:
 
 ```javascript
 app.post('/contact', (req, res) => {
@@ -475,6 +472,7 @@ app.post('/contact', (req, res) => {
     
     // Required field validation
     if (!name || name.trim().length === 0) {
+        // "push" is the same as "append". Here we are appending an error to an error list so that we can tell the client all the errors at once rather than the first one we see.
         errors.push('Name is required');
     }
     
@@ -493,6 +491,9 @@ app.post('/contact', (req, res) => {
     
     // If there are errors, return them
     if (errors.length > 0) {
+        // "map" is a way to loop through a list and have each element of the list return something into a new array. Here, each element of the errors list will be assigned as "error", and spit it out as a list element string.
+
+        // Finally, they are joined together with "join" because we need all the elements as a single string rather than an array of strings.
         return res.status(400).send(`
             <h1>Validation Errors</h1>
             <ul>
@@ -506,6 +507,12 @@ app.post('/contact', (req, res) => {
     // ... rest of your form handling code
 });
 ```
+> ### Other validation considerations
+>
+> - Malicious input. Clients may try to insert commands (especially SQL commands if they know the information is going to a database). You will need to properly escape their input so that it doesn't cause issues.
+> - Duplicate data. Sometimes information that's already sent to your server will be sent again. Consider how you want to handle that.
+
+
 
 ## Handling Different Input Types
 
@@ -535,108 +542,28 @@ app.post('/survey', (req, res) => {
 
 ### Security Considerations
 
-1. **Always validate server-side** - Never trust client-side validation alone
-2. **Sanitize input** - Clean user input to prevent XSS attacks
-3. **Use HTTPS** - Protect form data in transit
-4. **Rate limiting** - Prevent spam and abuse
-5. **CSRF protection** - Use CSRF tokens for state-changing operations
+- **Always validate server-side** - Never trust client-side validation alone
+- **Sanitize input** - Clean user input to prevent XSS attacks (will be covered later)
+- **Use HTTPS** - Protect form data in transit (again, we will cover this later)
 
 ### User Experience
 
-1. **Clear labels** - Use descriptive labels for all form fields
-2. **Helpful error messages** - Provide specific, actionable error messages
-3. **Progress indicators** - Show users what's happening during submission
-4. **Confirmation pages** - Confirm successful submissions
-5. **Accessibility** - Use proper form structure and ARIA attributes
+- **Clear labels** - Use descriptive labels for all form fields
+- **Helpful error messages** - Provide specific, actionable error messages
+- **Confirmation pages** - Confirm successful submissions
+- **Accessibility** - Use proper form structure
 
 ### Code Organization
 
-1. **Separate concerns** - Keep validation, processing, and response logic separate
-2. **Reusable validation** - Create validation functions you can reuse
-3. **Error handling** - Handle errors gracefully
-4. **Logging** - Log form submissions for debugging and analytics
+- **Separate concerns** - Keep validation, processing, and response logic separate. This will keep your code organized enough to understand what's happening and how to add to it.
+- **Reusable validation** - Create validation functions you can reuse
+- **Error handling** - Handle errors gracefully
+- **Logging** - Log form submissions for debugging and analytics (we'll talk about logging information later)
 
-## Common Form Patterns
-
-### Multi-Step Forms
-
-```javascript
-// Step 1: Personal Information
-app.get('/signup/step1', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'signup-step1.html'));
-});
-
-app.post('/signup/step1', (req, res) => {
-    // Store step 1 data in session or temporary storage
-    req.session.step1Data = req.body;
-    res.redirect('/signup/step2');
-});
-
-// Step 2: Preferences
-app.get('/signup/step2', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'signup-step2.html'));
-});
-
-app.post('/signup/step2', (req, res) => {
-    // Combine step 1 and step 2 data
-    const userData = {
-        ...req.session.step1Data,
-        ...req.body
-    };
-    
-    // Process complete user data
-    // ... save to database
-    
-    res.redirect('/signup/success');
-});
-```
-
-### AJAX Form Submission
-
-```html
-<!-- HTML form with AJAX submission -->
-<form id="contactForm">
-    <input type="text" name="name" required>
-    <textarea name="message" required></textarea>
-    <button type="submit">Send Message</button>
-</form>
-
-<div id="result"></div>
-
-<script>
-document.getElementById('contactForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const resultDiv = document.getElementById('result');
-    
-    try {
-        const response = await fetch('/contact', {
-            method: 'POST',
-            body: formData
-        });
-        
-        const result = await response.text();
-        resultDiv.innerHTML = result;
-        
-        if (response.ok) {
-            e.target.reset(); // Clear form on success
-        }
-    } catch (error) {
-        resultDiv.innerHTML = '<p>Error submitting form. Please try again.</p>';
-    }
-});
-</script>
-```
 
 ## Next Steps
 
-Now that you understand HTML forms and server-side form handling, you have the foundation to build interactive web applications that can collect and process user data. The next logical steps would be:
+Now that you understand the basics of HTML forms and server-side form handling, we'll want to cover how to modify files and communicate with a database to act as more permanent memory storage.
 
-1. **Database integration** - Store form data in a database
-2. **Advanced validation** - More sophisticated validation libraries
-3. **File handling** - Upload and process files
-4. **Authentication** - User login and registration systems
-5. **API development** - Create RESTful APIs for form data
 
 **[Return to Request Handling Chapter →](index.md)**
