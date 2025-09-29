@@ -58,7 +58,7 @@ Within a database, data is organized into **tables**. A table is like a spreadsh
 
 | Student ID | First Name | Last Name | Email |
 |------------|------------|-----------|-------|
-| 1001       | Mario       | Mario     | mario@kingdom.edu | 
+| 1001       | Mario      | Mario     | mario@school.edu |
 | 1002       | Sarah      | Johnson   | sarah@school.edu |
 | 1003       | Mike       | Brown     | mike@school.edu |
 
