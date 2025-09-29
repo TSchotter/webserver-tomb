@@ -130,6 +130,12 @@ Relationships are created by using **keys** - special columns that link tables t
 
 **Example**: If we have a "Courses" table and a "Students" table, we might create an "Enrollments" table that links them:
 
+- **Students Table** would contain columns like Student ID, First Name, and Last Name
+- **Courses Table** would contain columns like Course ID, Course Name, and Teacher
+- **Enrollments Table** would contain columns like Student ID and Course ID to show which students are enrolled in which courses
+
+This relationship table would show that Mario (Student ID 1001) is enrolled in both MATH101 (Algebra I) and ENG201 (Literature), while Sarah (Student ID 1002) is only enrolled in MATH101 (Algebra I).
+
 **Students Table**:
 | Student ID | First Name | Last Name |
 |------------|------------|-----------|
