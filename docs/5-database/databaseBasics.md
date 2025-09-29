@@ -133,7 +133,7 @@ Relationships are created by using **keys** - special columns that link tables t
 **Students Table**:
 | Student ID | First Name | Last Name |
 |------------|------------|-----------|
-| 1001       | John       | Smith     |
+| 1001       | Mario      | Mario     |
 | 1002       | Sarah      | Johnson   |
 
 **Courses Table**:
@@ -149,7 +149,7 @@ Relationships are created by using **keys** - special columns that link tables t
 | 1001       | ENG201    |
 | 1002       | MATH101   |
 
-This shows that John (1001) is enrolled in both Algebra I and Literature, while Sarah (1002) is only enrolled in Algebra I.
+This shows that Mario (1001) is enrolled in both Algebra I and Literature, while Sarah (1002) is only enrolled in Algebra I.
 
 ## Why This Structure Matters
 
