@@ -136,27 +136,6 @@ Relationships are created by using **keys** - special columns that link tables t
 
 This relationship table would show that Mario (Student ID 1001) is enrolled in both MATH101 (Algebra I) and ENG201 (Literature), while Sarah (Student ID 1002) is only enrolled in MATH101 (Algebra I).
 
-**Students Table**:
-| Student ID | First Name | Last Name |
-|------------|------------|-----------|
-| 1001       | Mario      | Mario     |
-| 1002       | Sarah      | Johnson   |
-
-**Courses Table**:
-| Course ID | Course Name | Teacher |
-|-----------|-------------|---------|
-| MATH101   | Algebra I   | Dr. Brown |
-| ENG201    | Literature  | Prof. Davis |
-
-**Enrollments Table** (showing the relationship):
-| Student ID | Course ID |
-|------------|-----------|
-| 1001       | MATH101   |
-| 1001       | ENG201    |
-| 1002       | MATH101   |
-
-This shows that Mario (1001) is enrolled in both Algebra I and Literature, while Sarah (1002) is only enrolled in Algebra I.
-
 ## Why This Structure Matters
 
 Understanding these database concepts is crucial because:
