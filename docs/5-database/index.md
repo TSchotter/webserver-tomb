@@ -13,6 +13,7 @@ Databases are the backbone of modern web applications. They store, organize, and
 In this chapter, we'll cover the essential concepts of databases:
 
 1. **[Database Basics](databaseBasics.md)** - Understanding what databases are, common database languages, and fundamental concepts like tables, rows, columns, and relationships
+2. **[Common MySQL Commands](mysqlCommands.md)** - Essential SQL commands for creating tables, inserting data, updating records, querying information, and deleting data
 
 ## Prerequisites
 

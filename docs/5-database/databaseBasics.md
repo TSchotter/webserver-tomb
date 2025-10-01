@@ -304,4 +304,4 @@ These fundamental concepts and planning steps form the foundation for all databa
 
 ---
 
-**[← Back to Database Fundamentals](index.md)** | **[Next: Coming Soon →]()**
+**[← Back to Database Fundamentals](index.md)** | **[Next: Common MySQL Commands →](mysqlCommands.md)**
