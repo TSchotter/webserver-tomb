@@ -13,7 +13,7 @@ We'll use a library management system as our example throughout this chapter, wi
 
 ## Our Library Database Example
 
-Before we dive into the commands, let's establish our example database structure:
+Let's establish our example database structure:
 
 - **Author Table**: Stores information about book authors
 - **Genre Table**: Stores different book genres/categories  
