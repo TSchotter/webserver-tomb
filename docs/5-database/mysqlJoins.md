@@ -62,28 +62,28 @@ Book Table:
 Let's assume we have this data in our tables:
 
 **Author Table:**
-| author_id | first_name | last_name | birth_year | bio |
-|-----------|------------|-----------|------------|-----|
-| 1 | J.K. | Rowling | 1965 | British author best known for the Harry Potter series |
-| 2 | George | Orwell | 1903 | English novelist and essayist, known for dystopian fiction |
-| 3 | Harper | Lee | 1926 | American novelist best known for To Kill a Mockingbird |
-| 4 | Agatha | Christie | 1890 | British mystery writer, creator of Hercule Poirot |
+| author_id | first_name | last_name | birth_year | bio                                                                                    |
+|-----------|------------|-----------|------------|----------------------------------------------------------------------------------------|
+| 1         | J.K.       | Rowling   | 1965       | British author best known for the Harry Potter series                                 |
+| 2         | George     | Orwell    | 1903       | English novelist and essayist, known for dystopian fiction                           |
+| 3         | Harper     | Lee       | 1926       | American novelist best known for To Kill a Mockingbird                               |
+| 4         | Agatha     | Christie  | 1890       | British mystery writer, creator of Hercule Poirot                                    |
 
 **Genre Table:**
-| genre_id | genre_name | description |
-|----------|------------|-------------|
-| 1 | Fantasy | Books with magical elements and imaginary worlds |
-| 2 | Dystopian Fiction | Stories set in oppressive, futuristic societies |
-| 3 | Literary Fiction | Character-driven stories with literary merit |
-| 4 | Mystery | Stories involving crime and investigation |
+| genre_id | genre_name        | description                                      |
+|----------|-------------------|--------------------------------------------------|
+| 1        | Fantasy           | Books with magical elements and imaginary worlds |
+| 2        | Dystopian Fiction | Stories set in oppressive, futuristic societies  |
+| 3        | Literary Fiction  | Character-driven stories with literary merit     |
+| 4        | Mystery           | Stories involving crime and investigation        |
 
 **Book Table:**
-| book_id | title | isbn | publication_year | author_id | genre_id |
-|---------|-------|------|------------------|-----------|----------|
-| 1 | Harry Potter and the Philosopher's Stone | 9780747532699 | 1997 | 1 | 1 |
-| 2 | 1984 | 9780451524935 | 1949 | 2 | 2 |
-| 3 | To Kill a Mockingbird | 9780061120084 | 1960 | 3 | 3 |
-| 4 | Murder on the Orient Express | 9780062073495 | 1934 | 4 | 4 |
+| book_id | title                              | isbn           | publication_year | author_id | genre_id |
+|---------|------------------------------------|----------------|------------------|-----------|----------|
+| 1       | Harry Potter and the Philosopher's Stone | 9780747532699  | 1997             | 1         | 1        |
+| 2       | 1984                               | 9780451524935  | 1949             | 2         | 2        |
+| 3       | To Kill a Mockingbird              | 9780061120084  | 1960             | 3         | 3        |
+| 4       | Murder on the Orient Express       | 9780062073495  | 1934             | 4         | 4        |
 
 ## Basic JOIN Syntax
 
@@ -127,12 +127,12 @@ INNER JOIN Author ON Book.author_id = Author.author_id;
 ```
 
 **Result:**
-| title | first_name | last_name |
-|-------|------------|-----------|
-| Harry Potter and the Philosopher's Stone | J.K. | Rowling |
-| 1984 | George | Orwell |
-| To Kill a Mockingbird | Harper | Lee |
-| Murder on the Orient Express | Agatha | Christie |
+| title                              | first_name | last_name |
+|------------------------------------|------------|-----------|
+| Harry Potter and the Philosopher's Stone | J.K.       | Rowling   |
+| 1984                               | George     | Orwell    |
+| To Kill a Mockingbird              | Harper     | Lee       |
+| Murder on the Orient Express       | Agatha     | Christie  |
 
 ### What Happened?
 
@@ -154,12 +154,12 @@ INNER JOIN Genre ON Book.genre_id = Genre.genre_id;
 ```
 
 **Result:**
-| title | first_name | last_name | genre_name |
-|-------|------------|-----------|------------|
-| Harry Potter and the Philosopher's Stone | J.K. | Rowling | Fantasy |
-| 1984 | George | Orwell | Dystopian Fiction |
-| To Kill a Mockingbird | Harper | Lee | Literary Fiction |
-| Murder on the Orient Express | Agatha | Christie | Mystery |
+| title                              | first_name | last_name | genre_name        |
+|------------------------------------|------------|-----------|-------------------|
+| Harry Potter and the Philosopher's Stone | J.K.       | Rowling   | Fantasy           |
+| 1984                               | George     | Orwell    | Dystopian Fiction |
+| To Kill a Mockingbird              | Harper     | Lee       | Literary Fiction  |
+| Murder on the Orient Express       | Agatha     | Christie  | Mystery           |
 
 ### Using Table Aliases
 
@@ -255,13 +255,13 @@ LEFT JOIN Book b ON a.author_id = b.author_id;
 ```
 
 **Result:**
-| first_name | last_name | title |
-|------------|-----------|-------|
-| J.K. | Rowling | Harry Potter and the Philosopher's Stone |
-| George | Orwell | 1984 |
-| Harper | Lee | To Kill a Mockingbird |
-| Agatha | Christie | Murder on the Orient Express |
-| Virginia | Woolf | NULL |
+| first_name | last_name | title                              |
+|------------|-----------|------------------------------------|
+| J.K.       | Rowling   | Harry Potter and the Philosopher's Stone |
+| George     | Orwell    | 1984                               |
+| Harper     | Lee       | To Kill a Mockingbird              |
+| Agatha     | Christie  | Murder on the Orient Express       |
+| Virginia   | Woolf     | NULL                               |
 
 ### What Happened?
 
@@ -285,7 +285,7 @@ WHERE b.book_id IS NULL;
 **Result:**
 | first_name | last_name |
 |------------|-----------|
-| Virginia | Woolf |
+| Virginia   | Woolf     |
 
 ## RIGHT JOIN (RIGHT OUTER JOIN)
 
@@ -319,15 +319,15 @@ RIGHT JOIN Genre g ON b.genre_id = g.genre_id;
 ```
 
 **Result:**
-| genre_name | title |
-|------------|-------|
-| Fantasy | Harry Potter and the Philosopher's Stone |
-| Fantasy | The Hobbit |
-| Dystopian Fiction | 1984 |
-| Dystopian Fiction | Animal Farm |
-| Literary Fiction | To Kill a Mockingbird |
-| Mystery | Murder on the Orient Express |
-| Science Fiction | NULL |
+| genre_name        | title                              |
+|-------------------|------------------------------------|
+| Fantasy           | Harry Potter and the Philosopher's Stone |
+| Fantasy           | The Hobbit                         |
+| Dystopian Fiction | 1984                               |
+| Dystopian Fiction | Animal Farm                        |
+| Literary Fiction  | To Kill a Mockingbird              |
+| Mystery           | Murder on the Orient Express       |
+| Science Fiction   | NULL                               |
 
 ### What Happened?
 
@@ -356,8 +356,8 @@ WHERE b.book_id IS NULL;
 ```
 
 **Result:**
-| genre_name |
-|------------|
+| genre_name      |
+|-----------------|
 | Science Fiction |
 
 

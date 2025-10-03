@@ -104,7 +104,7 @@ SELECT SUM(price) AS total_value FROM Book;
 **Result:**
 | total_value |
 |-------------|
-| 66.47 |
+| 66.47      |
 
 ### SUM with WHERE Conditions
 
@@ -196,13 +196,13 @@ ORDER BY book_count DESC;
 ```
 
 **Result:**
-| genre_name | book_count |
-|------------|------------|
-| Fantasy | 2 |
-| Dystopian Fiction | 2 |
-| Literary Fiction | 1 |
-| Mystery | 1 |
-| Science Fiction | 0 |
+| genre_name        | book_count |
+|-------------------|------------|
+| Fantasy           | 2          |
+| Dystopian Fiction | 2          |
+| Literary Fiction  | 1          |
+| Mystery           | 1          |
+| Science Fiction   | 0          |
 
 #### Count Books by Author
 
@@ -217,13 +217,13 @@ ORDER BY book_count DESC;
 ```
 
 **Result:**
-| author_name | book_count |
-|-------------|------------|
-| J.K. Rowling | 2 |
-| George Orwell | 2 |
-| Harper Lee | 1 |
-| Agatha Christie | 1 |
-| Virginia Woolf | 0 |
+| author_name     | book_count |
+|-----------------|------------|
+| J.K. Rowling    | 2          |
+| George Orwell   | 2          |
+| Harper Lee      | 1          |
+| Agatha Christie | 1          |
+| Virginia Woolf  | 0          |
 
 #### Average Price by Genre
 
@@ -239,13 +239,13 @@ ORDER BY average_price DESC;
 ```
 
 **Result:**
-| genre_name | average_price | book_count |
-|------------|---------------|------------|
-| Fantasy | 14.49 | 2 |
-| Literary Fiction | 11.50 | 1 |
-| Mystery | 8.75 | 1 |
-| Dystopian Fiction | 8.62 | 2 |
-| Science Fiction | NULL | 0 |
+| genre_name        | average_price | book_count |
+|-------------------|---------------|------------|
+| Fantasy           | 14.49         | 2          |
+| Literary Fiction  | 11.50         | 1          |
+| Mystery           | 8.75          | 1          |
+| Dystopian Fiction | 8.62          | 2          |
+| Science Fiction   | NULL          | 0          |
 
 ## HAVING - Filtering Grouped Results
 
@@ -267,10 +267,10 @@ ORDER BY book_count DESC;
 ```
 
 **Result:**
-| genre_name | book_count |
-|------------|------------|
-| Fantasy | 2 |
-| Dystopian Fiction | 2 |
+| genre_name        | book_count |
+|-------------------|------------|
+| Fantasy           | 2          |
+| Dystopian Fiction | 2          |
 
 #### Find Authors with Average Book Price Above $10
 
@@ -305,7 +305,7 @@ FROM Book;
 **Result:**
 | total_books | average_price | cheapest_book | most_expensive_book | total_value |
 |-------------|---------------|---------------|-------------------|-------------|
-| 6 | 11.078333 | 7.25 | 15.99 | 66.47 |
+| 6           | 11.078333     | 7.25          | 15.99             | 66.47       |
 
 ### Statistics by Genre
 
