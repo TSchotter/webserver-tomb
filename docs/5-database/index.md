@@ -14,6 +14,8 @@ In this chapter, we'll cover the essential concepts of databases:
 
 1. **[Database Basics](databaseBasics.md)** - Understanding what databases are, common database languages, and fundamental concepts like tables, rows, columns, and relationships
 2. **[Common MySQL Commands](mysqlCommands.md)** - Essential SQL commands for creating tables, inserting data, updating records, querying information, and deleting data
+3. **[MySQL JOINs](mysqlJoins.md)** - How to combine data from multiple tables using INNER, LEFT, and RIGHT JOINs
+4. **[Aggregate Functions and GROUP BY](mysqlAggregateFunctions.md)** - Performing calculations and data analysis using COUNT, SUM, AVG, MIN, MAX, and grouping data
 
 ## Prerequisites
 
@@ -32,6 +34,10 @@ By the end of this chapter, you will be able to:
 - Recognize proper data organization principles
 - Understand relationships between tables and how they work
 - Design basic database structures for simple applications
+- Use essential SQL commands to create, read, update, and delete data
+- Combine data from multiple tables using different types of JOINs
+- Perform calculations and data analysis using aggregate functions
+- Group and summarize data using GROUP BY and HAVING clauses
 
 Let's start with understanding the basics of databases!
 

@@ -754,4 +754,4 @@ Understanding these commands and their proper usage is essential for building we
 
 ---
 
-**[← Back to Database Basics](databaseBasics.md)** | **[Next: Database Joins →]()**
+**[← Back to Database Basics](databaseBasics.md)** | **[Next: MySQL JOINs →](mysqlJoins.md)**
