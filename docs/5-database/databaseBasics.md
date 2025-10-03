@@ -56,11 +56,36 @@ Within a database, data is organized into **tables**. A table is like a spreadsh
 
 **Example**: A "Students" table might look like this:
 
-| Student ID | First Name | Last Name | Email              |
-|------------|------------|-----------|--------------------|
-| 1001       | Mario      | Mario     | mario@school.edu   |
-| 1002       | Sarah      | Johnson   | sarah@school.edu   |
-| 1003       | Mike       | Brown     | mike@school.edu    |
+<table>
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1001</td>
+      <td>Mario</td>
+      <td>Mario</td>
+      <td>mario@school.edu</td>
+    </tr>
+    <tr>
+      <td>1002</td>
+      <td>Sarah</td>
+      <td>Johnson</td>
+      <td>sarah@school.edu</td>
+    </tr>
+    <tr>
+      <td>1003</td>
+      <td>Mike</td>
+      <td>Brown</td>
+      <td>mike@school.edu</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Rows (Records)
 Each **row** in a table represents one complete piece of data - one record. In our Students table, each row represents one student.

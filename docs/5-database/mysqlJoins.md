@@ -62,28 +62,128 @@ Book Table:
 Let's assume we have this data in our tables:
 
 **Author Table:**
-| author_id | first_name | last_name | birth_year | bio                                                                                    |
-|-----------|------------|-----------|------------|----------------------------------------------------------------------------------------|
-| 1         | J.K.       | Rowling   | 1965       | British author best known for the Harry Potter series                                 |
-| 2         | George     | Orwell    | 1903       | English novelist and essayist, known for dystopian fiction                           |
-| 3         | Harper     | Lee       | 1926       | American novelist best known for To Kill a Mockingbird                               |
-| 4         | Agatha     | Christie  | 1890       | British mystery writer, creator of Hercule Poirot                                    |
+<table>
+  <thead>
+    <tr>
+      <th>author_id</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>birth_year</th>
+      <th>bio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>J.K.</td>
+      <td>Rowling</td>
+      <td>1965</td>
+      <td>British author best known for the Harry Potter series</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>George</td>
+      <td>Orwell</td>
+      <td>1903</td>
+      <td>English novelist and essayist, known for dystopian fiction</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Harper</td>
+      <td>Lee</td>
+      <td>1926</td>
+      <td>American novelist best known for To Kill a Mockingbird</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Agatha</td>
+      <td>Christie</td>
+      <td>1890</td>
+      <td>British mystery writer, creator of Hercule Poirot</td>
+    </tr>
+  </tbody>
+</table>
 
 **Genre Table:**
-| genre_id | genre_name        | description                                      |
-|----------|-------------------|--------------------------------------------------|
-| 1        | Fantasy           | Books with magical elements and imaginary worlds |
-| 2        | Dystopian Fiction | Stories set in oppressive, futuristic societies  |
-| 3        | Literary Fiction  | Character-driven stories with literary merit     |
-| 4        | Mystery           | Stories involving crime and investigation        |
+<table>
+  <thead>
+    <tr>
+      <th>genre_id</th>
+      <th>genre_name</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Fantasy</td>
+      <td>Books with magical elements and imaginary worlds</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Dystopian Fiction</td>
+      <td>Stories set in oppressive, futuristic societies</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Literary Fiction</td>
+      <td>Character-driven stories with literary merit</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Mystery</td>
+      <td>Stories involving crime and investigation</td>
+    </tr>
+  </tbody>
+</table>
 
 **Book Table:**
-| book_id | title                              | isbn           | publication_year | author_id | genre_id |
-|---------|------------------------------------|----------------|------------------|-----------|----------|
-| 1       | Harry Potter and the Philosopher's Stone | 9780747532699  | 1997             | 1         | 1        |
-| 2       | 1984                               | 9780451524935  | 1949             | 2         | 2        |
-| 3       | To Kill a Mockingbird              | 9780061120084  | 1960             | 3         | 3        |
-| 4       | Murder on the Orient Express       | 9780062073495  | 1934             | 4         | 4        |
+<table>
+  <thead>
+    <tr>
+      <th>book_id</th>
+      <th>title</th>
+      <th>isbn</th>
+      <th>publication_year</th>
+      <th>author_id</th>
+      <th>genre_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Harry Potter and the Philosopher's Stone</td>
+      <td>9780747532699</td>
+      <td>1997</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1984</td>
+      <td>9780451524935</td>
+      <td>1949</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>To Kill a Mockingbird</td>
+      <td>9780061120084</td>
+      <td>1960</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Murder on the Orient Express</td>
+      <td>9780062073495</td>
+      <td>1934</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Basic JOIN Syntax
 
@@ -127,12 +227,37 @@ INNER JOIN Author ON Book.author_id = Author.author_id;
 ```
 
 **Result:**
-| title                              | first_name | last_name |
-|------------------------------------|------------|-----------|
-| Harry Potter and the Philosopher's Stone | J.K.       | Rowling   |
-| 1984                               | George     | Orwell    |
-| To Kill a Mockingbird              | Harper     | Lee       |
-| Murder on the Orient Express       | Agatha     | Christie  |
+<table>
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>first_name</th>
+      <th>last_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Harry Potter and the Philosopher's Stone</td>
+      <td>J.K.</td>
+      <td>Rowling</td>
+    </tr>
+    <tr>
+      <td>1984</td>
+      <td>George</td>
+      <td>Orwell</td>
+    </tr>
+    <tr>
+      <td>To Kill a Mockingbird</td>
+      <td>Harper</td>
+      <td>Lee</td>
+    </tr>
+    <tr>
+      <td>Murder on the Orient Express</td>
+      <td>Agatha</td>
+      <td>Christie</td>
+    </tr>
+  </tbody>
+</table>
 
 ### What Happened?
 
@@ -154,12 +279,42 @@ INNER JOIN Genre ON Book.genre_id = Genre.genre_id;
 ```
 
 **Result:**
-| title                              | first_name | last_name | genre_name        |
-|------------------------------------|------------|-----------|-------------------|
-| Harry Potter and the Philosopher's Stone | J.K.       | Rowling   | Fantasy           |
-| 1984                               | George     | Orwell    | Dystopian Fiction |
-| To Kill a Mockingbird              | Harper     | Lee       | Literary Fiction  |
-| Murder on the Orient Express       | Agatha     | Christie  | Mystery           |
+<table>
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>genre_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Harry Potter and the Philosopher's Stone</td>
+      <td>J.K.</td>
+      <td>Rowling</td>
+      <td>Fantasy</td>
+    </tr>
+    <tr>
+      <td>1984</td>
+      <td>George</td>
+      <td>Orwell</td>
+      <td>Dystopian Fiction</td>
+    </tr>
+    <tr>
+      <td>To Kill a Mockingbird</td>
+      <td>Harper</td>
+      <td>Lee</td>
+      <td>Literary Fiction</td>
+    </tr>
+    <tr>
+      <td>Murder on the Orient Express</td>
+      <td>Agatha</td>
+      <td>Christie</td>
+      <td>Mystery</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Using Table Aliases
 
@@ -255,13 +410,42 @@ LEFT JOIN Book b ON a.author_id = b.author_id;
 ```
 
 **Result:**
-| first_name | last_name | title                              |
-|------------|-----------|------------------------------------|
-| J.K.       | Rowling   | Harry Potter and the Philosopher's Stone |
-| George     | Orwell    | 1984                               |
-| Harper     | Lee       | To Kill a Mockingbird              |
-| Agatha     | Christie  | Murder on the Orient Express       |
-| Virginia   | Woolf     | NULL                               |
+<table>
+  <thead>
+    <tr>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>J.K.</td>
+      <td>Rowling</td>
+      <td>Harry Potter and the Philosopher's Stone</td>
+    </tr>
+    <tr>
+      <td>George</td>
+      <td>Orwell</td>
+      <td>1984</td>
+    </tr>
+    <tr>
+      <td>Harper</td>
+      <td>Lee</td>
+      <td>To Kill a Mockingbird</td>
+    </tr>
+    <tr>
+      <td>Agatha</td>
+      <td>Christie</td>
+      <td>Murder on the Orient Express</td>
+    </tr>
+    <tr>
+      <td>Virginia</td>
+      <td>Woolf</td>
+      <td>NULL</td>
+    </tr>
+  </tbody>
+</table>
 
 ### What Happened?
 
@@ -283,9 +467,20 @@ WHERE b.book_id IS NULL;
 ```
 
 **Result:**
-| first_name | last_name |
-|------------|-----------|
-| Virginia   | Woolf     |
+<table>
+  <thead>
+    <tr>
+      <th>first_name</th>
+      <th>last_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Virginia</td>
+      <td>Woolf</td>
+    </tr>
+  </tbody>
+</table>
 
 ## RIGHT JOIN (RIGHT OUTER JOIN)
 
@@ -319,15 +514,44 @@ RIGHT JOIN Genre g ON b.genre_id = g.genre_id;
 ```
 
 **Result:**
-| genre_name        | title                              |
-|-------------------|------------------------------------|
-| Fantasy           | Harry Potter and the Philosopher's Stone |
-| Fantasy           | The Hobbit                         |
-| Dystopian Fiction | 1984                               |
-| Dystopian Fiction | Animal Farm                        |
-| Literary Fiction  | To Kill a Mockingbird              |
-| Mystery           | Murder on the Orient Express       |
-| Science Fiction   | NULL                               |
+<table>
+  <thead>
+    <tr>
+      <th>genre_name</th>
+      <th>title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fantasy</td>
+      <td>Harry Potter and the Philosopher's Stone</td>
+    </tr>
+    <tr>
+      <td>Fantasy</td>
+      <td>The Hobbit</td>
+    </tr>
+    <tr>
+      <td>Dystopian Fiction</td>
+      <td>1984</td>
+    </tr>
+    <tr>
+      <td>Dystopian Fiction</td>
+      <td>Animal Farm</td>
+    </tr>
+    <tr>
+      <td>Literary Fiction</td>
+      <td>To Kill a Mockingbird</td>
+    </tr>
+    <tr>
+      <td>Mystery</td>
+      <td>Murder on the Orient Express</td>
+    </tr>
+    <tr>
+      <td>Science Fiction</td>
+      <td>NULL</td>
+    </tr>
+  </tbody>
+</table>
 
 ### What Happened?
 
@@ -356,9 +580,18 @@ WHERE b.book_id IS NULL;
 ```
 
 **Result:**
-| genre_name      |
-|-----------------|
-| Science Fiction |
+<table>
+  <thead>
+    <tr>
+      <th>genre_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Science Fiction</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## JOIN Comparison Summary

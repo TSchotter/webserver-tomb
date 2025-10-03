@@ -102,9 +102,18 @@ SELECT SUM(price) AS total_value FROM Book;
 ```
 
 **Result:**
-| total_value |
-|-------------|
-| 66.47      |
+<table>
+  <thead>
+    <tr>
+      <th>total_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>66.47</td>
+    </tr>
+  </tbody>
+</table>
 
 ### SUM with WHERE Conditions
 
@@ -130,9 +139,18 @@ SELECT AVG(publication_year) AS average_publication_year FROM Book;
 ```
 
 **Result:**
-| average_price |
-|---------------|
-| 11.078333     |
+<table>
+  <thead>
+    <tr>
+      <th>average_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>11.078333</td>
+    </tr>
+  </tbody>
+</table>
 
 ### AVG with WHERE Conditions
 
@@ -164,9 +182,20 @@ FROM Book;
 ```
 
 **Result:**
-| cheapest_book | most_expensive_book |
-|---------------|-------------------|
-| 7.25          | 15.99             |
+<table>
+  <thead>
+    <tr>
+      <th>cheapest_book</th>
+      <th>most_expensive_book</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7.25</td>
+      <td>15.99</td>
+    </tr>
+  </tbody>
+</table>
 
 ## GROUP BY - Grouping Data
 
@@ -196,13 +225,36 @@ ORDER BY book_count DESC;
 ```
 
 **Result:**
-| genre_name        | book_count |
-|-------------------|------------|
-| Fantasy           | 2          |
-| Dystopian Fiction | 2          |
-| Literary Fiction  | 1          |
-| Mystery           | 1          |
-| Science Fiction   | 0          |
+<table>
+  <thead>
+    <tr>
+      <th>genre_name</th>
+      <th>book_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fantasy</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Dystopian Fiction</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Literary Fiction</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Mystery</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Science Fiction</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
 
 #### Count Books by Author
 
@@ -217,13 +269,36 @@ ORDER BY book_count DESC;
 ```
 
 **Result:**
-| author_name     | book_count |
-|-----------------|------------|
-| J.K. Rowling    | 2          |
-| George Orwell   | 2          |
-| Harper Lee      | 1          |
-| Agatha Christie | 1          |
-| Virginia Woolf  | 0          |
+<table>
+  <thead>
+    <tr>
+      <th>author_name</th>
+      <th>book_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>J.K. Rowling</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>George Orwell</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Harper Lee</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Agatha Christie</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Virginia Woolf</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
 
 #### Average Price by Genre
 
@@ -239,13 +314,42 @@ ORDER BY average_price DESC;
 ```
 
 **Result:**
-| genre_name        | average_price | book_count |
-|-------------------|---------------|------------|
-| Fantasy           | 14.49         | 2          |
-| Literary Fiction  | 11.50         | 1          |
-| Mystery           | 8.75          | 1          |
-| Dystopian Fiction | 8.62          | 2          |
-| Science Fiction   | NULL          | 0          |
+<table>
+  <thead>
+    <tr>
+      <th>genre_name</th>
+      <th>average_price</th>
+      <th>book_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fantasy</td>
+      <td>14.49</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Literary Fiction</td>
+      <td>11.50</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Mystery</td>
+      <td>8.75</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Dystopian Fiction</td>
+      <td>8.62</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Science Fiction</td>
+      <td>NULL</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
 
 ## HAVING - Filtering Grouped Results
 
@@ -267,10 +371,24 @@ ORDER BY book_count DESC;
 ```
 
 **Result:**
-| genre_name        | book_count |
-|-------------------|------------|
-| Fantasy           | 2          |
-| Dystopian Fiction | 2          |
+<table>
+  <thead>
+    <tr>
+      <th>genre_name</th>
+      <th>book_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fantasy</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Dystopian Fiction</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
 
 #### Find Authors with Average Book Price Above $10
 
@@ -303,9 +421,26 @@ FROM Book;
 ```
 
 **Result:**
-| total_books | average_price | cheapest_book | most_expensive_book | total_value |
-|-------------|---------------|---------------|-------------------|-------------|
-| 6           | 11.078333     | 7.25          | 15.99             | 66.47       |
+<table>
+  <thead>
+    <tr>
+      <th>total_books</th>
+      <th>average_price</th>
+      <th>cheapest_book</th>
+      <th>most_expensive_book</th>
+      <th>total_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6</td>
+      <td>11.078333</td>
+      <td>7.25</td>
+      <td>15.99</td>
+      <td>66.47</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Statistics by Genre
 
