@@ -35,7 +35,7 @@ logo: "/images/logo.png"
 ga_tracking: G-HLW24YQRMH
 
 # Build settings
-markdown: kramdown
+markdown: GFM
 remote_theme: pmarsceill/just-the-docs
 plugins:
   - jekyll-feed
