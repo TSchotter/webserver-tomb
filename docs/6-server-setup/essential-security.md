@@ -196,6 +196,8 @@ You'll be prompted for:
 1. **File location**: Press Enter to use the default location (`~/.ssh/id_rsa`)
 2. **Passphrase**: Enter a strong passphrase (recommended) or press Enter for no passphrase
 
+> The passphrase ensures it's not just the ssh key someone needs, but the passphrase with it.
+
 ### Copy Public Key to Server
 
 #### Method 1: Using ssh-copy-id (Recommended)
@@ -379,8 +381,9 @@ You're ready to proceed with setting up your development environment. The next s
 - Ensure you're using the correct username
 
 ### Locked Out of Server
-- If you disabled password authentication too early, contact your hosting provider
-- They can usually restore access through a console or reset your server
+- If you disabled password authentication too early, you might still be able to get into the server through the hosting provider. Digital ocean has a "console" that is effectively like logging into the server directly and thus would bypass any firewall issues. If it's a problem with the root password, there is a root password reset.
+
+- Otherwise, it might be time to nuke the server and tell it to start from a blank slate again.
 
 ### Firewall Blocking Connections
 - Check UFW status: `sudo ufw status`
