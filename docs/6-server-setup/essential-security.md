@@ -312,11 +312,19 @@ sudo ufw allow 2222
 sudo ufw delete allow 22
 ```
 
+**Important Note:** If you originally used `ufw allow ssh` (which allows port 22), you'll need to update this rule because it's tied to the default SSH port. The `ssh` service name in UFW refers specifically to port 22, so when you change the SSH port, this rule no longer applies to your SSH service.
+
+You can either:
+- Use the specific port number: `sudo ufw allow 2222`
+- Or update the SSH service rule: `sudo ufw delete allow ssh` then `sudo ufw allow 2222`
+
 #### Step 4: Restart SSH Service
 
 ```bash
 sudo systemctl restart ssh
 ```
+
+**Important Safety Tip:** Keep your current terminal session open after restarting SSH. If something goes wrong with the new port configuration, you'll still have an active connection to troubleshoot and revert the changes if needed.
 
 #### Step 5: Test the New Port
 
