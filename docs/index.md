@@ -48,3 +48,8 @@ Ready to begin? Start with the setup guide:
 18. [Database Overview](5-database/index.md)
 19. [Database Basics](5-database/databaseBasics.md)
 
+## Server Setup
+
+20. [Server Setup Overview](6-server-setup/index.md)
+21. [Essential Server Security](6-server-setup/essential-security.md)
+
