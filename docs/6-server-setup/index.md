@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Server Setup
-nav_order: 1
+nav_order: 6
 ---
 
 # Server Setup
