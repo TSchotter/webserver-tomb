@@ -177,23 +177,24 @@ SSH keys are a pair of cryptographic keys (public and private) that provide a mo
 #### On Windows (PowerShell or Command Prompt):
 
 ```bash
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 #### On macOS/Linux:
 
 ```bash
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 **Understanding the `ssh-keygen` flags:**
-- `-t rsa`: Specifies the **type** of key to generate. RSA is the most widely supported algorithm. Other options include `ed25519` (newer, more secure) or `ecdsa`.
-- `-b 4096`: Sets the **bit length** of the key. 4096 bits provides strong security. The default is 2048 bits, but 4096 is recommended for better security.
+- `-t ed25519`: Specifies the **type** of key to generate. Ed25519 is the modern default - it's faster, more secure, and produces smaller keys than RSA. It's widely supported on modern systems.
 - `-C "your_email@example.com"`: Adds a **comment** to the key. This is typically your email address and helps identify the key's owner. It's stored in the key file but doesn't affect security.
+
+**Note:** Ed25519 keys don't need a bit length specification (no `-b` flag) because they have a fixed, secure key size. If you need RSA for compatibility with older systems, you can use `ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`.
 
 You'll be prompted for:
 
-1. **File location**: Press Enter to use the default location (`~/.ssh/id_rsa`)
+1. **File location**: Press Enter to use the default location (`~/.ssh/id_ed25519`)
 2. **Passphrase**: Enter a strong passphrase (recommended) or press Enter for no passphrase
 
 > The passphrase ensures it's not just the ssh key someone needs, but the passphrase with it.
@@ -214,7 +215,7 @@ If `ssh-copy-id` isn't available, manually copy the key:
 
 1. Display your public key:
 ```bash
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_ed25519.pub
 ```
 
 2. Copy the entire output (it's one long line)
