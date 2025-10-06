@@ -260,7 +260,13 @@ sudo nano /etc/ssh/sshd_config
 ```
 PasswordAuthentication no
 PubkeyAuthentication yes
+PermitRootLogin no
 ```
+
+**Additional Security: Disable Root Login**
+- `PermitRootLogin no`: Prevents direct root login via SSH, even with keys
+- This forces all SSH access to go through your regular user account
+- You can still use `sudo` to perform administrative tasks when needed
 
 3. Restart the SSH service:
 ```bash
@@ -268,6 +274,71 @@ sudo systemctl restart ssh
 ```
 
 **Warning:** Make sure your SSH key authentication is working before disabling password authentication!
+
+### Change SSH Port (Optional but Recommended)
+
+By default, SSH runs on port 22, which makes it a common target for automated attacks. Changing to a non-standard port can significantly reduce these attacks.
+
+#### Step 1: Choose a New Port
+
+Pick a port number between 1024 and 65535. Avoid well-known ports. Common choices:
+- 2222, 2200, 2022 (easy to remember)
+- 8022, 9022 (less predictable)
+
+#### Step 2: Update SSH Configuration
+
+1. Edit the SSH configuration:
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+2. Find the line `#Port 22` and change it to:
+```
+Port 2222
+```
+(Replace 2222 with your chosen port number)
+
+3. Save and exit the file
+
+#### Step 3: Update Firewall Rules
+
+**Critical:** Update your firewall before restarting SSH!
+
+```bash
+# Allow the new SSH port
+sudo ufw allow 2222
+
+# Remove the old SSH port rule (optional, but recommended)
+sudo ufw delete allow 22
+```
+
+#### Step 4: Restart SSH Service
+
+```bash
+sudo systemctl restart ssh
+```
+
+#### Step 5: Test the New Port
+
+From your local machine, test the connection:
+```bash
+ssh -p 2222 yourusername@YOUR_SERVER_IP
+```
+
+If it works, you can update your SSH client configuration to use the new port by default.
+
+#### Benefits of Changing SSH Port
+
+- **Reduces automated attacks** - Bots typically scan port 22
+- **Hides SSH service** - Makes your server less obvious to casual scanners
+- **Simple security layer** - Easy to implement with minimal risk
+
+#### Important Notes
+
+- **Remember your new port** - Write it down somewhere safe
+- **Update all SSH clients** - Any scripts or applications connecting to SSH need the new port
+- **Keep port 22 rule until confirmed working** - Don't remove it until you've tested the new port
+- **Some hosting providers** may have restrictions on which ports you can use
 
 ## Monitoring Server Access
 
