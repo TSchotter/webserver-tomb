@@ -20,6 +20,7 @@ In this chapter, you'll learn how to:
 ## Chapter Overview
 
 1. **[Essential Server Security](essential-security.md)** - The critical first steps every server administrator must take
+2. **[GitHub Terminal Connection](github-terminal-connection.md)** - Connect your server to GitHub for seamless code management
 
 ## Why This Matters
 
