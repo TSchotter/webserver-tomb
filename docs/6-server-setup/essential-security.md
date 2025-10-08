@@ -451,7 +451,7 @@ Your server is now properly secured with:
 - Firewall protection
 - SSH key authentication
 
-You're ready to proceed with setting up your development environment. The next step will be to install and configure Docker, which will allow you to run containerized applications and services on your server. Docker provides a consistent, isolated environment for your web applications and makes deployment much easier.
+You're ready to proceed with setting up your development environment. The next step will be to connect your server to GitHub, which will allow you to easily clone repositories, push code changes, and collaborate on projects directly from your server's terminal.
 
 ## Common Issues and Solutions
 
