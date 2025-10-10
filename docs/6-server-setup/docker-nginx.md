@@ -286,7 +286,6 @@ Lets create an HTML file to be served by the nginx. In your folder, create `inde
     <p>This page is being served from a Docker container running nginx!</p>
 </body>
 </html>
-EOF
 ```
 
 #### Step 3: Stop the Current Container
@@ -358,20 +357,19 @@ services:
     volumes:
       - ~/my-website:/usr/share/nginx/html
     restart: unless-stopped
-EOF
 ```
 
 ### Using Docker Compose
 
 ```bash
 # Start the service
-docker-compose up -d
+docker compose up -d
 
 # Stop the service
-docker-compose down
+docker compose down
 
 # View logs
-docker-compose logs
+docker compose logs
 ```
 > Make sure you're in the project directory with your docker compose file.
 
