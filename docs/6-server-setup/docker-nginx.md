@@ -122,15 +122,15 @@ To pull from docker's official source a list of packages that they offer.
 
 Now that we have the list of repositories, including what docker has, we can install them.
 
-```
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```bash
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 This is several packages, not just one giant package.
 
 As a confirmation, lets check to see if docker is runnign properly. The Docker service *should* automatically start once the package is installed.
 
-```
+```bash
 sudo systemctl status docker
 ```
 
@@ -149,7 +149,7 @@ Test Docker with a simple command:
 docker --version
 ```
 
-You should see output like: `Docker version 24.0.7, build afdd53b`
+You should see output like: `Docker version 28.5.1, build e180ab8`
 
 ### Step 7: Add Your User to Docker Group
 
@@ -397,5 +397,27 @@ docker compose logs
    docker run -d --name my-nginx --memory="512m" --cpus="1.0" -p 8080:80 nginx
    ```
 
+## Next Steps
+
+Now that you have Docker and nginx running, you can:
+
+1. **Deploy Your Own Applications** - Containerize your Node.js, Python, or other applications
+2. **Set Up Reverse Proxies** - Use nginx to route traffic to multiple applications
+3. **Learn Docker Networking** - Connect multiple containers together
+4. **Explore Docker Volumes** - Persistent data storage for your applications
+5. **Study nginx Configuration** - Customize nginx for your specific needs
+
+## Summary
+
+In this chapter, you've learned:
+
+- How to install Docker on a Linux server
+- Basic Docker concepts (images, containers, commands)
+- How to run nginx in a Docker container
+- How to serve custom content through nginx
+- Basic container management and troubleshooting
+- Introduction to Docker Compose for multi-container applications
+
+Docker provides a powerful way to package and deploy applications consistently. Combined with nginx, you have a solid foundation for serving web content and building more complex application architectures.
 
 **[Return to Server Setup Chapter →](index.md)**
