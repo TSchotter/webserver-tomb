@@ -1,3 +1,10 @@
+---
+layout: default
+title: Setting Up nginx with Docker and Node.js
+nav_exclude: true
+parent: Server Setup
+---
+
 # Setting Up nginx with Docker and Node.js
 
 This chapter builds upon the Docker and Node.js setup from the previous chapter. We'll configure nginx as a reverse proxy for our Node.js application and use Docker Compose to orchestrate both services.
