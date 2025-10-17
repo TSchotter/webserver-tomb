@@ -504,4 +504,4 @@ In this chapter, you've learned how to:
 
 This provides a solid foundation for your Node.js application. The next chapter will show you how to add nginx as a reverse proxy for production-ready deployments.
 
-**[Return to Server Setup Chapter](index.md)**
+**[Next: Setting Up nginx with Docker and Node.js →](docker-nginx-setup.md)** | **[Return to Server Setup Chapter](index.md)**

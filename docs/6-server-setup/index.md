@@ -26,7 +26,8 @@ In this chapter, you'll learn how to:
 1. **[Essential Server Security](essential-security.md)** - The critical first steps every server administrator must take
 2. **[GitHub Terminal Connection](github-terminal-connection.md)** - Connect your server to GitHub for seamless code management
 3. **[Docker and nginx](docker-nginx.md)** - Installing and testing Docker with an nginx container
-4. **[Docker and Node.js](docker-and-nodejs.md)** - Containerizing Node.js applications with nginx reverse proxy
+4. **[Docker and Node.js](docker-and-nodejs.md)** - Containerizing Node.js applications with Docker Compose
+5. **[Setting Up nginx with Docker and Node.js](docker-nginx-setup.md)** - Advanced setup with nginx reverse proxy for production-ready applications
 
 ## Why This Matters
 

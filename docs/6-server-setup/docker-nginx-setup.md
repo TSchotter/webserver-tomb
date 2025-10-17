@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Setting Up nginx with Docker and Node.js
-nav_exclude: true
+nav_order: 5
 parent: Server Setup
 ---
 
