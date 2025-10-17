@@ -365,9 +365,12 @@ docker rm my-nodejs-container my-nginx-proxy
 ```
 
 # Start the services with Docker Compose
+```
 docker compose up -d
+```
 
-# Check the status
+Check the status
+```
 docker compose ps
 ```
 
