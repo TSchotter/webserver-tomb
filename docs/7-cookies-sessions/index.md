@@ -2,7 +2,6 @@
 layout: default
 title: Cookies and Sessions
 nav_order: 7
-parent: Server Setup
 ---
 
 # Cookies and Sessions
