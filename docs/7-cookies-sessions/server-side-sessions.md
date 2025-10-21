@@ -118,6 +118,7 @@ mkdir views
 Create `views/home.hbs`:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,6 +139,7 @@ Create `views/home.hbs`:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ### Step 5: Create the Basic Login Template
@@ -145,6 +147,7 @@ Create `views/home.hbs`:
 Create `views/login.hbs`:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -172,6 +175,7 @@ Create `views/login.hbs`:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ### Step 6: Create the Basic Profile Template
@@ -179,6 +183,7 @@ Create `views/login.hbs`:
 Create `views/profile.hbs`:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -195,6 +200,7 @@ Create `views/profile.hbs`:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ## Testing the Basic Application
@@ -373,6 +379,7 @@ app.listen(PORT, () => {
 Update `views/home.hbs` to show the session functionality:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -402,6 +409,7 @@ Update `views/home.hbs` to show the session functionality:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ### Step 10: Update the Login Template
@@ -409,6 +417,7 @@ Update `views/home.hbs` to show the session functionality:
 Update `views/login.hbs` to handle errors:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -440,6 +449,7 @@ Update `views/login.hbs` to handle errors:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ### Step 11: Update the Profile Template
@@ -447,6 +457,7 @@ Update `views/login.hbs` to handle errors:
 Update `views/profile.hbs` to include logout functionality:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -468,6 +479,7 @@ Update `views/profile.hbs` to include logout functionality:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ## Testing the Updated Session Application

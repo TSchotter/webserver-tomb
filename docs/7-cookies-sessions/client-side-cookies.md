@@ -89,6 +89,7 @@ mkdir views
 Create `views/home.hbs`:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <head>
     <title>Basic Form Demo</title>
@@ -107,6 +108,7 @@ Create `views/home.hbs`:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ### Step 5: Create the Basic Change Name Template
@@ -114,6 +116,7 @@ Create `views/home.hbs`:
 Create `views/changePage.hbs`:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,6 +142,7 @@ Create `views/changePage.hbs`:
     
 </body>
 </html>
+{% endraw %}
 ```
 
 ## Testing the Basic Application
@@ -237,6 +241,7 @@ app.listen(PORT, () => {
 Update `views/home.hbs` to show the cookie functionality:
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -269,6 +274,7 @@ Update `views/home.hbs` to show the cookie functionality:
     </div>
 </body>
 </html>
+{% endraw %}
 ```
 
 ### Step 9: Add Cookie Reset Functionality
