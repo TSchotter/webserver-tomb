@@ -88,54 +88,58 @@ mkdir views
 
 Create `views/home.hbs`:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;head&gt;
-    &lt;title&gt;Basic Form Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Basic Form Demo&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<head>
+    <title>Basic Form Demo</title>
+</head>
+<body>
+    <h1>Basic Form Demo</h1>
     
-    &lt;h2&gt;Current User Information&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; {{user.name}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Message:&lt;/strong&gt; {{user.msg}}&lt;/p&gt;
+    <h2>Current User Information</h2>
+    <p><strong>Name:</strong> {{user.name}}</p>
+    <p><strong>Message:</strong> {{user.msg}}</p>
     
-    &lt;div&gt;
-        &lt;a href="/change"&gt;Change Name&lt;/a&gt;
-    &lt;/div&gt;
+    <div>
+        <a href="/change">Change Name</a>
+    </div>
     
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ### Step 5: Create the Basic Change Name Template
 
 Create `views/changePage.hbs`:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Change Name - Basic Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Change Your Name&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Name - Basic Demo</title>
+</head>
+<body>
+    <h1>Change Your Name</h1>
     
-    &lt;form method="POST" action="/setname"&gt;
-        &lt;div&gt;
-            &lt;label for="name"&gt;Enter your name:&lt;/label&gt;
-            &lt;input type="text" id="name" name="name" placeholder="Your name here" required&gt;
-        &lt;/div&gt;
+    <form method="POST" action="/setname">
+        <div>
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="name" placeholder="Your name here" required>
+        </div>
         
-        &lt;div&gt;
-            &lt;button type="submit"&gt;Save Name&lt;/button&gt;
-            &lt;a href="/"&gt;Cancel&lt;/a&gt;
-        &lt;/div&gt;
-    &lt;/form&gt;
+        <div>
+            <button type="submit">Save Name</button>
+            <a href="/">Cancel</a>
+        </div>
+    </form>
     
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ## Testing the Basic Application
 
@@ -145,7 +149,7 @@ Create `views/changePage.hbs`:
    ```
 
 2. **Visit the application:**
-   - Go to `http://[yourserver]:3010`
+   - Go to `http://localhost:3010`
    - You should see "Guest" as the name
 
 3. **Try the form:**
@@ -232,26 +236,40 @@ app.listen(PORT, () => {
 
 Update `views/home.hbs` to show the cookie functionality:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;head&gt;
-    &lt;title&gt;Cookie Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Cookie Demo Application&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Demo</title>
+</head>
+<body>
+    <h1>Cookie Demo Application</h1>
     
-    &lt;h2&gt;Current User Information&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; {{user.name}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Message:&lt;/strong&gt; {{user.msg}}&lt;/p&gt;
+    <h2>Current User Information</h2>
+    <p><strong>Name:</strong> {{user.name}}</p>
+    <p><strong>Message:</strong> {{user.msg}}</p>
     
-    &lt;div&gt;
-        &lt;a href="/change"&gt;Change Name&lt;/a&gt;
-        &lt;form method="POST" action="/resetcookie" style="display: inline;"&gt;
-            &lt;button type="submit"&gt;Reset Cookie&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
+    <div>
+        <a href="/change">Change Name</a>
+        <form method="POST" action="/resetcookie" style="display: inline;">
+            <button type="submit">Reset Cookie</button>
+        </form>
+    </div>
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+    <div>
+        <h3>Success! Cookies are working:</h3>
+        <ul>
+            <li>When you first visit, you're shown as "Guest"</li>
+            <li>Click "Change Name" to set a cookie with your name</li>
+            <li>After setting the cookie, refresh the page - your name persists!</li>
+            <li>Click "Reset Cookie" to clear the stored data</li>
+        </ul>
+    </div>
+</body>
+</html>
+```
 
 ### Step 9: Add Cookie Reset Functionality
 
@@ -273,7 +291,7 @@ app.post('/resetcookie', (req, res) => {
    ```
 
 2. **Visit the application:**
-   - Go to `http://[your server]:3010`
+   - Go to `http://localhost:3010`
    - You should see "Guest" as the name
 
 3. **Set a cookie:**
@@ -359,6 +377,29 @@ res.cookie('cart', JSON.stringify(cartItems), { maxAge: 7 * 24 * 60 * 60 * 1000 
 res.cookie('language', 'en', { maxAge: 365 * 24 * 60 * 60 * 1000 }); // 1 year
 ```
 
+## Security Considerations
+
+### 1. Never Store Sensitive Data
+```javascript
+// ❌ DON'T do this
+res.cookie('password', userPassword);
+
+// ✅ DO this instead
+res.cookie('user_id', userId);
+```
+
+### 2. Use httpOnly for Security
+```javascript
+// ✅ Prevents JavaScript access
+res.cookie('session', sessionId, { httpOnly: true });
+```
+
+### 3. Set Appropriate Expiration
+```javascript
+// ✅ Short expiration for sensitive data
+res.cookie('temp_token', token, { maxAge: 15 * 60 * 1000 }); // 15 minutes
+```
+
 ## Troubleshooting
 
 ### Cookie Not Being Set
@@ -380,6 +421,9 @@ res.cookie('language', 'en', { maxAge: 365 * 24 * 60 * 60 * 1000 }); // 1 year
 
 Now that you understand basic cookie usage, you're ready to learn about:
 - **[Server-Side Sessions](server-side-sessions.md)** - More secure session management
+- **[Cookie Security](cookie-security.md)** - Advanced security options
+- **[Authentication Patterns](authentication-patterns.md)** - Login systems with cookies
+
 ---
 
 **[Previous: Cookies and Sessions Overview](index.md)** | **[Next: Server-Side Sessions](server-side-sessions.md)**

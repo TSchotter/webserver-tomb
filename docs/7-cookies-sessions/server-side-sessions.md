@@ -117,79 +117,85 @@ mkdir views
 
 Create `views/home.hbs`:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Basic Login Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Basic Login Demo&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Login Demo</title>
+</head>
+<body>
+    <h1>Basic Login Demo</h1>
     
-    &lt;h2&gt;Current User Information&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; {{user.name}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; {{#if user.isLoggedIn}}Logged In{{else}}Guest{{/if}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Message:&lt;/strong&gt; Please login to access your profile.&lt;/p&gt;
+    <h2>Current User Information</h2>
+    <p><strong>Name:</strong> {{user.name}}</p>
+    <p><strong>Status:</strong> {{#if user.isLoggedIn}}Logged In{{else}}Guest{{/if}}</p>
+    <p><strong>Message:</strong> Please login to access your profile.</p>
     
-    &lt;p&gt;
-        &lt;a href="/login"&gt;Login&lt;/a&gt; | 
-        &lt;a href="/profile"&gt;View Profile&lt;/a&gt;
-    &lt;/p&gt;
+    <p>
+        <a href="/login">Login</a> | 
+        <a href="/profile">View Profile</a>
+    </p>
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ### Step 5: Create the Basic Login Template
 
 Create `views/login.hbs`:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Login - Basic Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Login&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Basic Demo</title>
+</head>
+<body>
+    <h1>Login</h1>
     
-    &lt;form method="POST" action="/login"&gt;
-        &lt;p&gt;
-            &lt;label for="username"&gt;Username:&lt;/label&gt;&lt;br&gt;
-            &lt;input type="text" id="username" name="username" required&gt;
-        &lt;/p&gt;
+    <form method="POST" action="/login">
+        <p>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required>
+        </p>
         
-        &lt;p&gt;
-            &lt;label for="password"&gt;Password:&lt;/label&gt;&lt;br&gt;
-            &lt;input type="password" id="password" name="password" required&gt;
-        &lt;/p&gt;
+        <p>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required>
+        </p>
         
-        &lt;p&gt;
-            &lt;button type="submit"&gt;Login&lt;/button&gt;
-            &lt;a href="/"&gt;Cancel&lt;/a&gt;
-        &lt;/p&gt;
-    &lt;/form&gt;
+        <p>
+            <button type="submit">Login</button>
+            <a href="/">Cancel</a>
+        </p>
+    </form>
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ### Step 6: Create the Basic Profile Template
 
 Create `views/profile.hbs`:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Profile - Basic Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;User Profile&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile - Basic Demo</title>
+</head>
+<body>
+    <h1>User Profile</h1>
     
-    &lt;h2&gt;Welcome, {{user.name}}!&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Login Time:&lt;/strong&gt; {{user.loginTime}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Visit Count:&lt;/strong&gt; {{user.visitCount}}&lt;/p&gt;
+    <h2>Welcome, {{user.name}}!</h2>
+    <p><strong>Login Time:</strong> {{user.loginTime}}</p>
+    <p><strong>Visit Count:</strong> {{user.visitCount}}</p>
     
-    &lt;p&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/p&gt;
+    <p><a href="/">Home</a></p>
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ## Testing the Basic Application
 
@@ -366,97 +372,103 @@ app.listen(PORT, () => {
 
 Update `views/home.hbs` to show the session functionality:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Session Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Session Demo Application&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Demo</title>
+</head>
+<body>
+    <h1>Session Demo Application</h1>
     
-    &lt;h2&gt;Current User Information&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; {{user.name}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; {{#if user.isLoggedIn}}Logged In{{else}}Guest{{/if}}&lt;/p&gt;
+    <h2>Current User Information</h2>
+    <p><strong>Name:</strong> {{user.name}}</p>
+    <p><strong>Status:</strong> {{#if user.isLoggedIn}}Logged In{{else}}Guest{{/if}}</p>
     {{#if user.isLoggedIn}}
-    &lt;p&gt;&lt;strong&gt;Login Time:&lt;/strong&gt; {{user.loginTime}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Visit Count:&lt;/strong&gt; {{user.visitCount}}&lt;/p&gt;
+    <p><strong>Login Time:</strong> {{user.loginTime}}</p>
+    <p><strong>Visit Count:</strong> {{user.visitCount}}</p>
     {{/if}}
     
-    &lt;p&gt;
+    <p>
         {{#if user.isLoggedIn}}
-            &lt;a href="/profile"&gt;View Profile&lt;/a&gt; | 
-            &lt;form method="POST" action="/logout" style="display: inline;"&gt;
-                &lt;button type="submit"&gt;Logout&lt;/button&gt;
-            &lt;/form&gt;
+            <a href="/profile">View Profile</a> | 
+            <form method="POST" action="/logout" style="display: inline;">
+                <button type="submit">Logout</button>
+            </form>
         {{else}}
-            &lt;a href="/login"&gt;Login&lt;/a&gt;
+            <a href="/login">Login</a>
         {{/if}}
-    &lt;/p&gt;
+    </p>
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ### Step 10: Update the Login Template
 
 Update `views/login.hbs` to handle errors:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Login - Session Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Login&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Session Demo</title>
+</head>
+<body>
+    <h1>Login</h1>
     
-    &lt;form method="POST" action="/login"&gt;
-        &lt;p&gt;
-            &lt;label for="username"&gt;Username:&lt;/label&gt;&lt;br&gt;
-            &lt;input type="text" id="username" name="username" required&gt;
-        &lt;/p&gt;
+    <form method="POST" action="/login">
+        <p>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required>
+        </p>
         
-        &lt;p&gt;
-            &lt;label for="password"&gt;Password:&lt;/label&gt;&lt;br&gt;
-            &lt;input type="password" id="password" name="password" required&gt;
-        &lt;/p&gt;
+        <p>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required>
+        </p>
         
-        &lt;p&gt;
-            &lt;button type="submit"&gt;Login&lt;/button&gt;
-            &lt;a href="/"&gt;Cancel&lt;/a&gt;
-        &lt;/p&gt;
-    &lt;/form&gt;
+        <p>
+            <button type="submit">Login</button>
+            <a href="/">Cancel</a>
+        </p>
+    </form>
     
     {{#if error}}
-    &lt;p style="color: red;"&gt;Please enter both username and password.&lt;/p&gt;
+    <p style="color: red;">Please enter both username and password.</p>
     {{/if}}
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ### Step 11: Update the Profile Template
 
 Update `views/profile.hbs` to include logout functionality:
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Profile - Session Demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;User Profile&lt;/h1&gt;
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile - Session Demo</title>
+</head>
+<body>
+    <h1>User Profile</h1>
     
-    &lt;h2&gt;Welcome, {{user.name}}!&lt;/h2&gt;
-    &lt;p&gt;&lt;strong&gt;Login Time:&lt;/strong&gt; {{user.loginTime}}&lt;/p&gt;
-    &lt;p&gt;&lt;strong&gt;Visit Count:&lt;/strong&gt; {{user.visitCount}}&lt;/p&gt;
+    <h2>Welcome, {{user.name}}!</h2>
+    <p><strong>Login Time:</strong> {{user.loginTime}}</p>
+    <p><strong>Visit Count:</strong> {{user.visitCount}}</p>
     
-    &lt;p&gt;
-        &lt;a href="/"&gt;Home&lt;/a&gt; | 
-        &lt;form method="POST" action="/logout" style="display: inline;"&gt;
-            &lt;button type="submit"&gt;Logout&lt;/button&gt;
-        &lt;/form&gt;
-    &lt;/p&gt;
+    <p>
+        <a href="/">Home</a> | 
+        <form method="POST" action="/logout" style="display: inline;">
+            <button type="submit">Logout</button>
+        </form>
+    </p>
     
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+</body>
+</html>
+```
 
 ## Testing the Updated Session Application
 
