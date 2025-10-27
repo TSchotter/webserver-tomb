@@ -20,8 +20,6 @@ This chapter covers how to implement cookies and sessions in your web applicatio
 
 1. **[Client-Side Cookies with Forms](client-side-cookies.md)** - Learn to set and read cookies using simple HTML forms
 2. **[Server-Side Sessions](server-side-sessions.md)** - Implement secure session management
-3. **[Cookie Security](cookie-security.md)** - Understand security options and best practices
-4. **[Authentication Patterns](authentication-patterns.md)** - Common authentication flows using cookies and sessions
 
 ## Prerequisites
 
@@ -36,4 +34,4 @@ If you want to jump right in, you can start with the [Client-Side Cookies tutori
 
 ---
 
-**[Previous: nginx with Docker Setup](../6-server-setup/docker-nginx-setup.md)** | **[Next: Client-Side Cookies](client-side-cookies.md)**
+**[Previous: nginx with Docker Setup](../6-server-setup/docker-nginx-setup.md)** | **[Next: REST API Principles](../8-rest-api/index.md)**
