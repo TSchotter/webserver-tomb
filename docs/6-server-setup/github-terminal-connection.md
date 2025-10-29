@@ -178,7 +178,51 @@ git commit -m "Initial commit - testing GitHub connection"
 git remote add origin git@github.com:username/your-repo-name.git
 
 # Push to GitHub
+# Note: Use 'main' for newer repositories or 'master' for older ones
 git push -u origin main
+# OR if your repository uses master branch:
+# git push -u origin master
+```
+
+### Setting Up Remote Origin
+
+If you need to set or change the remote origin later:
+
+```bash
+# Check current remote
+git remote -v
+
+# Add a new remote origin
+git remote add origin git@github.com:username/your-repo-name.git
+
+# Change existing remote origin URL
+git remote set-url origin git@github.com:username/your-repo-name.git
+
+# Remove remote origin
+git remote remove origin
+```
+
+### Pushing Commits
+
+Once your remote is set up, you can push commits:
+
+```bash
+# Push commits to the remote repository
+# Use 'main' for newer repositories or 'master' for older ones
+git push origin main
+# OR
+git push origin master
+
+# Push and set upstream tracking (sets remote branch as default)
+git push -u origin main
+# OR
+git push -u origin master
+
+# Push all branches
+git push --all origin
+
+# Push tags
+git push --tags origin
 ```
 
 ## Troubleshooting Common Issues
@@ -238,6 +282,8 @@ In this chapter, you learned how to:
 ✅ Test your GitHub connection  
 ✅ Configure Git with your identity  
 ✅ Clone and push to repositories  
+✅ Set up remote origin (master/main)  
+✅ Push commits to GitHub repositories  
 
 Your server is now ready to work with GitHub repositories! In the next chapter, we'll explore more advanced server configuration topics.
 
@@ -258,4 +304,21 @@ git config --global user.email "your-email@example.com"
 
 # Clone repository
 git clone git@github.com:username/repository-name.git
+
+# Set remote origin
+git remote add origin git@github.com:username/repository-name.git
+
+# Check remote configuration
+git remote -v
+
+# Change remote origin URL
+git remote set-url origin git@github.com:username/repository-name.git
+
+# Push commits (use 'main' or 'master' depending on your repository)
+git push origin main
+git push origin master
+
+# Push and set upstream tracking
+git push -u origin main
+git push -u origin master
 ```
