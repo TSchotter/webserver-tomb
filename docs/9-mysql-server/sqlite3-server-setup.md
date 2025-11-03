@@ -17,7 +17,7 @@ SQLite provides several advantages:
 - **Portable** - Database file can be moved anywhere
 - **Perfect for Learning** - Simple to understand and use
 - **File-Based** - No user management or passwords needed
-- **Lightweight** - Minimal resource usage
+- **Works on the dang server** - Digital oceans smallest droplet seems to not have the resources nessessary for more complicated databases.
 
 ## Prerequisites
 
@@ -63,10 +63,6 @@ sudo apt install sqlite3 -y
 
 The `-y` flag automatically answers "yes" to any prompts during installation.
 
-This command will:
-- Download and install SQLite3 command-line tools
-- Install the SQLite library for programmatic access
-
 ## Step 4: Verify SQLite Installation
 
 Check that SQLite was installed correctly:
@@ -77,7 +73,7 @@ sqlite3 --version
 
 You should see output showing your SQLite version, something like:
 ```
-3.45.3 2024-01-15 17:30:09 507a34387266f0e71ca3dde1b8d3c83e8674a7a3e83df378e72514b3ebdd1914
+3.46.1 2024-08-13 09:16:08 c9c2ab54ba1f5f46360f1b4f35d849cd3f080e6fc2b6c60e91b16c63f69aalt1 (64-bit)
 ```
 
 ## Step 5: Create Your First Database
@@ -116,7 +112,7 @@ CREATE TABLE users (
 
 SQLite uses slightly different data types than MySQL:
 - `INTEGER` instead of `INT`
-- `TEXT` instead of `VARCHAR`
+- `TEXT` instead of `VARCHAR` for any text based input.
 - `AUTOINCREMENT` instead of `AUTO_INCREMENT`
 - `DATETIME` for timestamps
 
@@ -241,21 +237,6 @@ SQLite doesn't have users, passwords, or permissions. The database file itself c
 
 SQLite doesn't run as a service. It's accessed directly through the file system.
 
-### File Location
-
-The database is a single file you can see, copy, and move:
-
-```bash
-# List database files
-ls -lh *.db
-
-# Copy a database
-cp myapp.db myapp_backup.db
-
-# View file size
-ls -lh myapp.db
-```
-
 ## Common SQLite Commands Reference
 
 ### SQL Commands (Standard SQL)
@@ -329,29 +310,12 @@ sqlite3 myapp.db "SELECT * FROM users;"
 sqlite3 myapp.db < script.sql
 ```
 
-## Database File Management
+> ### That last command is important, it will allow you to create a setup file to initialize your database with tables.
 
-Since SQLite databases are just files, you can manage them like any other file:
+Use of the ```<``` isn't something unique to sqlite or any program specifically. It's a linux commandline tool to take the text from a file and use it as input. You're effectively running SQL commands directly from the command line, but using a file to say what you would normally type.
 
-```bash
-# List database files
-ls *.db
+The `>` operator works in the opposite direction - it redirects output from a command into a file. For example, `sqlite3 myapp.db .dump > backup.sql` takes all the output from the `.dump` command (which shows all your database contents as SQL commands) and saves it to a file called `backup.sql` instead of displaying it on the screen. This is called output redirection and is a fundamental Linux command-line feature. You can think of `<` as "read from file" and `>` as "write to file". 
 
-# View database file size
-ls -lh myapp.db
-
-# Copy a database
-cp myapp.db myapp_backup.db
-
-# Delete a database (WARNING: This deletes all data!)
-rm myapp.db
-
-# Move/rename a database
-mv myapp.db production.db
-
-# Check file permissions
-ls -l myapp.db
-```
 
 ## Best Practices
 
@@ -375,201 +339,12 @@ ls -l myapp.db
          └── app_20240115.db
    ```
 
-4. **File Permissions** - Control access using file system permissions:
-   ```bash
-   # Make database readable/writable by owner only
-   chmod 600 myapp.db
-   ```
-
-## Connecting SQLite to Node.js Express
-
-Now that you have SQLite set up, let's connect it to a Node.js Express server. SQLite works great with Node.js applications!
-
-### Step 1: Install Required Packages
-
-Install the `better-sqlite3` package for Node.js in your Express project:
-
-```bash
-npm install better-sqlite3
-```
-
-`better-sqlite3` is a fast, synchronous SQLite3 library that's perfect for most Node.js applications.
-
-### Step 2: Create a Database Connection Module
-
-Create a file to manage your database connection. Let's create `database.js`:
-
-```javascript
-const Database = require('better-sqlite3');
-const path = require('path');
-
-// Connect to database file
-const dbPath = path.join(__dirname, 'myapp.db');
-const db = new Database(dbPath);
-
-// Enable foreign keys (SQLite has this disabled by default)
-db.pragma('foreign_keys = ON');
-
-// Create tables if they don't exist
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-`);
-
-module.exports = db;
-```
-
-### Step 3: Create Your Express App with SQLite Routes
-
-Now let's create your Express application with routes that use the database. Here's an example `server.js`:
-
-```javascript
-const express = require('express');
-const app = express();
-const db = require('./database');
-
-// Middleware
-app.use(express.json()); // Parse JSON bodies
-
-// GET all users
-app.get('/users', (req, res) => {
-  try {
-    const users = db.prepare('SELECT * FROM users').all();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// GET user by ID
-app.get('/users/:id', (req, res) => {
-  try {
-    const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.params.id);
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404).json({ error: 'User not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// POST create new user
-app.post('/users', (req, res) => {
-  try {
-    const { name, email } = req.body;
-    const stmt = db.prepare('INSERT INTO users (name, email) VALUES (?, ?)');
-    const result = stmt.run(name, email);
-    res.status(201).json({ 
-      id: result.lastInsertRowid,
-      name,
-      email 
-    });
-  } catch (error) {
-    if (error.message.includes('UNIQUE constraint')) {
-      res.status(400).json({ error: 'Email already exists' });
-    } else {
-      res.status(500).json({ error: error.message });
-    }
-  }
-});
-
-// PUT update user
-app.put('/users/:id', (req, res) => {
-  try {
-    const { name, email } = req.body;
-    const stmt = db.prepare('UPDATE users SET name = ?, email = ? WHERE id = ?');
-    const result = stmt.run(name, email, req.params.id);
-    
-    if (result.changes > 0) {
-      res.json({ message: 'User updated successfully' });
-    } else {
-      res.status(404).json({ error: 'User not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// DELETE user
-app.delete('/users/:id', (req, res) => {
-  try {
-    const stmt = db.prepare('DELETE FROM users WHERE id = ?');
-    const result = stmt.run(req.params.id);
-    
-    if (result.changes > 0) {
-      res.json({ message: 'User deleted successfully' });
-    } else {
-      res.status(404).json({ error: 'User not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
-
-### Important Notes
-
-1. **Database File Location**: Make sure your database file path is correct. Use `path.join(__dirname, 'myapp.db')` to create the database in your project directory.
-
-2. **Error Handling**: Always handle database errors properly. SQLite will throw errors for constraint violations (like duplicate emails).
-
-3. **Prepared Statements**: Always use prepared statements (with `?` placeholders) to prevent SQL injection:
-   ```javascript
-   // Good - uses prepared statement
-   db.prepare('SELECT * FROM users WHERE email = ?').get(email);
-   
-   //Bad - vulnerable to SQL injection
-   db.prepare(`SELECT * FROM users WHERE email = '${email}'`).get();
-   ```
-
-4. **Connection Closing**: With `better-sqlite3`, you can close the connection when shutting down:
-   ```javascript
-   process.on('SIGINT', () => {
-     db.close();
-     process.exit(0);
-   });
-   ```
-
-5. **Production Considerations**: 
-   - Ensure the database file has proper permissions
-   - Set up regular backups (just copy the `.db` file)
-   - Consider database migrations for schema changes
-
-### Import/Export Data
-
-```bash
-# Export to SQL
-sqlite3 myapp.db .dump > backup.sql
-
-# Export to CSV
-sqlite3 myapp.db <<EOF
-.headers on
-.mode csv
-.output users.csv
-SELECT * FROM users;
-EOF
-
-# Import from SQL file
-sqlite3 myapp.db < backup.sql
-```
 
 ## Next Steps
 
 Now that you have SQLite set up and working, you can:
 
-- Learn to connect Node.js applications to SQLite
+- Learn to connect Node.js applications to SQLite - see [Connecting SQLite to Node.js Express](sqlite3-nodejs-express.md)
 - Create multiple databases for different projects
 - Practice SQL queries and database design
 - Learn about SQLite-specific features
@@ -579,4 +354,4 @@ SQLite is perfect for learning and development. When you need more advanced feat
 
 ---
 
-**[Previous: Database Server Setup](index.md)**
+**[Previous: Database Server Setup](index.md)** | **[Next: Connecting SQLite to Node.js Express](sqlite3-nodejs-express.md)**

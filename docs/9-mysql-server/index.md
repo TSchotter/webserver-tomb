@@ -18,7 +18,8 @@ This chapter covers setting up and working with database systems. You'll learn h
 
 ## Chapter Contents
 
-1. **[Setting Up SQLite Database](mysql-server-setup.md)** - Install and configure SQLite for your applications
+1. **[Setting Up SQLite Database](sqlite3-server-setup.md)** - Install and configure SQLite for your applications
+2. **[Connecting SQLite to Node.js Express](sqlite3-nodejs-express.md)** - Connect SQLite to your Node.js applications and build Express routes
 
 ## Prerequisites
 
@@ -29,9 +30,9 @@ Before starting this chapter, make sure you have:
 
 ## Quick Start
 
-Start with [Setting Up SQLite Database](mysql-server-setup.md) to get SQLite installed and working on your system.
+Start with [Setting Up SQLite Database](sqlite3-server-setup.md) to get SQLite installed and working on your system.
 
 ---
 
-**[Previous: REST API Principles](../8-rest-api/what-is-rest.md)** | **[Next: Setting Up SQLite Database](mysql-server-setup.md)**
+**[Previous: REST API Principles](../8-rest-api/what-is-rest.md)** | **[Next: Setting Up SQLite Database](sqlite3-server-setup.md)**
 
