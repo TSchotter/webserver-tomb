@@ -20,7 +20,6 @@ In this chapter, you'll learn how to create your own reusable Node.js modules. U
 ## Chapter Contents
 
 1. **[Module Basics](module-basics.md)** - Learn the fundamentals of creating and using your own modules
-2. **[Advanced Module Patterns](advanced-modules.md)** - Explore class-based modules and advanced patterns
 
 ## Prerequisites
 

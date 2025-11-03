@@ -3,6 +3,7 @@ layout: default
 title: Advanced Module Patterns
 nav_order: 2
 parent: Creating Your Own Node.js Modules
+nav_exclude: true
 ---
 
 # Advanced Module Patterns
@@ -22,7 +23,7 @@ function requireAuth(req, res, next) {
     next();
   } else {
     // User is not authenticated, redirect to login
-    res.status(401).json({ error: 'Authentication required' });
+    res.redirect('/login');
   }
 }
 
@@ -30,7 +31,8 @@ function requireAdmin(req, res, next) {
   if (req.session && req.session.role === 'admin') {
     next();
   } else {
-    res.status(403).json({ error: 'Admin access required' });
+    // User is not authorized, redirect to access denied page
+    res.redirect('/access-denied');
   }
 }
 
@@ -40,25 +42,51 @@ module.exports = {
 };
 ```
 
-Use it:
+In the above, these will be used as middleware functions in the app.get function calls. They will happen *first*, then potentially call "next" when conditions are right. 
+
+Use it with Handlebars:
 
 ```javascript
 // server.js
 const express = require('express');
+const exphbs = require('express-handlebars');
 const { requireAuth, requireAdmin } = require('./auth-middleware');
 
 const app = express();
 
+// Set up Handlebars as the view engine
+app.engine('hbs', exphbs.engine({ extname: '.hbs' }));
+app.set('view engine', 'hbs');
+app.set('views', './views');
+
 // Protected route - requires authentication
 app.get('/profile', requireAuth, (req, res) => {
-  res.json({ user: req.session.userId });
+  res.render('profile', { 
+    user: req.session.userId,
+    username: req.session.username 
+  });
 });
 
 // Admin route - requires admin role
 app.get('/admin', requireAdmin, (req, res) => {
-  res.json({ message: 'Admin panel' });
+  res.render('admin', { 
+    message: 'Admin panel',
+    user: req.session.userId 
+  });
+});
+
+// Login page
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// Access denied page
+app.get('/access-denied', (req, res) => {
+  res.render('access-denied');
 });
 ```
+
+
 
 ## Creating a Custom Session Store Module
 
