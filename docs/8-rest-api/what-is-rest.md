@@ -208,4 +208,4 @@ DELETE /api/users/789          // Delete user 789
 
 ---
 
-**[Previous: REST API Principles](index.md)** | **[Next: Chapter 9](../9-next-chapter/index.md)**
+**[Previous: REST API Principles](index.md)** | **[Next: Database Server Setup](../9-mysql-server/index.md)**
