@@ -90,7 +90,14 @@ app.get('/access-denied', (req, res) => {
 
 ## Creating a Custom Session Store Module
 
-Let's create a complete example by building a custom SQLite session store as a module:
+Let's create a complete example by building a custom SQLite session store as a module.
+
+**Why extend Store?** The `express-session` package provides a base `Store` class that defines the interface for session stores. By extending this class, we ensure our custom store is compatible with `express-session` and implements all the required methods (`get`, `set`, `destroy`, etc.). You can find the Store class documentation in the [express-session npm package documentation](https://www.npmjs.com/package/express-session#store). You'll notice at the top of this documentation, the authors specifically mention that the default memory storage method is not designed for production. So we're going to use the database instead.
+
+When you create a custom session store, you need to:
+1. Import the `Store` class from `express-session`
+2. Extend it with your custom class
+3. Implement the required methods that `express-session` expects
 
 ```javascript
 // sqlite-session-store.js
@@ -449,14 +456,6 @@ console.log('All tests passed!');
        └── helpers.js
    ```
 
-## Summary
-
-You've learned:
-- How to create custom middleware modules
-- Building class-based modules (like session stores)
-- Using factory patterns for configurable modules
-- Organizing routes into separate modules
-- Creating reusable error handling modules
 
 These patterns will help you write more maintainable and organized Node.js applications.
 
