@@ -559,5 +559,5 @@ module.exports = class Model {
 
 ---
 
-**[Previous: Creating Your Own Node.js Modules](index.md)**
+**[Previous: Creating Your Own Node.js Modules](index.md)** | **[Next: Middleware Modules](middleware-modules.md)**
 
