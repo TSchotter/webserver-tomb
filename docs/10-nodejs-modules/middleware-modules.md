@@ -420,19 +420,7 @@ app.use(handleError);     // General error handler (runs if error occurs)
 5. **Keep middleware focused** - One middleware, one responsibility
 6. **Export reusable middleware** - Create modules for middleware you'll use in multiple places
 
-## Summary
-
-You've learned:
-- **Pre-route middleware**: Runs before route handlers (authentication, validation)
-- **Post-route middleware**: Runs after route handlers (logging, response modification)
-- How to create authentication and validation middleware modules
-- How to create logging and response modification middleware
-- How to handle errors with middleware
-- Best practices for organizing middleware modules
-
-Understanding the execution order of middleware is crucial for building robust Express applications. Pre-route middleware protects and prepares your routes, while post-route middleware helps you monitor and enhance responses.
-
 ---
 
-**[Previous: Module Basics](module-basics.md)** | **[Next: Advanced Module Patterns](advanced-modules.md)**
+**[Previous: Module Basics](module-basics.md)** | **[Next: Creating Your Own Node.js Modules](index.md)**
 
