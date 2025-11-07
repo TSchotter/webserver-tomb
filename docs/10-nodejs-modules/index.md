@@ -20,6 +20,7 @@ In this chapter, you'll learn how to create your own reusable Node.js modules. U
 ## Chapter Contents
 
 1. **[Module Basics](module-basics.md)** - Learn the fundamentals of creating and using your own modules
+2. **[Middleware Modules](middleware-modules.md)** - Create pre-route and post-route middleware modules
 
 ## Prerequisites
 
