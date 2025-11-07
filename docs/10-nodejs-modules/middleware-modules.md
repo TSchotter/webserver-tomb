@@ -198,34 +198,8 @@ function requestLogger(req, res, next) {
   next();
 }
 
-function detailedLogger(req, res, next) {
-  const startTime = Date.now();
-  const originalEnd = res.end;
-  
-  res.end = function(chunk, encoding) {
-    const duration = Date.now() - startTime;
-    
-    const logData = {
-      timestamp: new Date().toISOString(),
-      method: req.method,
-      path: req.path,
-      statusCode: res.statusCode,
-      duration: `${duration}ms`,
-      ip: req.ip,
-      userAgent: req.get('user-agent')
-    };
-    
-    console.log(JSON.stringify(logData));
-    
-    originalEnd.call(res, chunk, encoding);
-  };
-  
-  next();
-}
-
 module.exports = {
-  requestLogger: requestLogger,
-  detailedLogger: detailedLogger
+  requestLogger: requestLogger
 };
 ```
 
@@ -234,7 +208,7 @@ module.exports = {
 ```javascript
 // server.js
 const express = require('express');
-const { requestLogger, detailedLogger } = require('./logging-middleware');
+const { requestLogger } = require('./logging-middleware');
 
 const app = express();
 
