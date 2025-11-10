@@ -171,6 +171,8 @@ app.use(session({
 // Your routes here...
 ```
 
+By doing things this way, rather than creating a whole new session management system for SQLite3, we can use express-session in a near identical fasion. But on the backend, it will interact with the database instead of internal memory.
+
 ## Creating a Router Module
 
 Organize routes into separate modules:
