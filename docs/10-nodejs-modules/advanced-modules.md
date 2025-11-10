@@ -3,7 +3,6 @@ layout: default
 title: Advanced Module Patterns
 nav_order: 3
 parent: Creating Your Own Node.js Modules
-nav_exclude: true
 ---
 
 # Advanced Module Patterns
@@ -172,51 +171,6 @@ app.use(session({
 // Your routes here...
 ```
 
-## Module Factory Pattern
-
-Sometimes you want to create modules that return configured instances:
-
-```javascript
-// logger.js
-
-function createLogger(level = 'info') {
-  const levels = ['error', 'warn', 'info', 'debug'];
-  const currentLevel = levels.indexOf(level);
-  
-  function log(messageLevel, message) {
-    const messageLevelIndex = levels.indexOf(messageLevel);
-    if (messageLevelIndex <= currentLevel) {
-      const timestamp = new Date().toISOString();
-      console.log(`[${timestamp}] [${messageLevel.toUpperCase()}] ${message}`);
-    }
-  }
-  
-  return {
-    error: (msg) => log('error', msg),
-    warn: (msg) => log('warn', msg),
-    info: (msg) => log('info', msg),
-    debug: (msg) => log('debug', msg)
-  };
-}
-
-module.exports = createLogger;
-```
-
-Use it:
-
-```javascript
-// app.js
-const createLogger = require('./logger');
-
-// Create different loggers for different parts of your app
-const appLogger = createLogger('info');
-const debugLogger = createLogger('debug');
-
-appLogger.info('Application started');
-appLogger.error('Something went wrong');
-debugLogger.debug('Detailed debug information');
-```
-
 ## Creating a Router Module
 
 Organize routes into separate modules:
@@ -362,8 +316,8 @@ console.log('All tests passed!');
 
 1. **Keep modules focused** - One module, one purpose
 2. **Use descriptive names** - `auth-middleware.js` not `helpers.js`
-3. **Export what's needed** - Don't export internal functions
-4. **Document exports** - Add comments for complex modules
+3. **Export what's needed** - Don't export internal functions. If a function is only used by other functions in the file (and not outside), don't export it.
+4. **Document exports** - Add comments for complex modules. Not just for others, but also for future you.
 5. **Group related modules** - Use folders for organization:
    ```
    project/
@@ -375,7 +329,6 @@ console.log('All tests passed!');
    │   └── posts.js
    └── utils/
        ├── database.js
-       └── helpers.js
    ```
 
 
