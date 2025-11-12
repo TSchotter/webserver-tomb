@@ -16,10 +16,13 @@ In this chapter, you'll learn how to give your server a memorable domain name in
 - How to purchase a domain name
 - How to configure DNS records to point your domain to your server
 - Understanding DNS record types (A, CNAME, NS)
+- What SSL certificates are and why HTTPS is essential
+- How to use Nginx Proxy Manager for easy SSL certificate management
 
 ## Chapter Contents
 
 1. **[Getting a Domain Name](getting-a-domain-name.md)** - Learn about domain names and how to purchase and configure one for your server
+2. **[Proxy Manager and SSL](proxy-manager-and-ssl.md)** - Understand SSL certificates and how to use Nginx Proxy Manager for easy SSL management
 
 ## Prerequisites
 
@@ -30,7 +33,7 @@ Before starting this chapter, make sure you have:
 
 ## Quick Start
 
-Start with [Getting a Domain Name](getting-a-domain-name.md) to learn how to purchase and configure a domain for your server.
+Start with [Getting a Domain Name](getting-a-domain-name.md) to learn how to purchase and configure a domain for your server. Then proceed to [Proxy Manager and SSL](proxy-manager-and-ssl.md) to secure your website with HTTPS.
 
 ---
 

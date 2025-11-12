@@ -251,5 +251,5 @@ Once propagation is complete, you should be able to access your server using you
 
 ---
 
-**[Previous: Chapter Overview](../11-putting-server-on-map/index.md)** | **[Next: Chapter Overview](../11-putting-server-on-map/index.md)**
+**[Previous: Chapter Overview](index.md)** | **[Next: Proxy Manager and SSL](proxy-manager-and-ssl.md)**
 
