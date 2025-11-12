@@ -82,3 +82,8 @@ Ready to begin? Start with the setup guide:
 37. [Node.js Modules Overview](10-nodejs-modules/index.md)
 38. [Module Basics](10-nodejs-modules/module-basics.md)
 
+## Putting the Server on the Map
+
+39. [Putting the Server on the Map Overview](11-putting-server-on-map/index.md)
+40. [Getting a Domain Name](11-putting-server-on-map/getting-a-domain-name.md)
+
