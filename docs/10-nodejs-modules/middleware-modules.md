@@ -422,5 +422,5 @@ app.use(handleError);     // General error handler (runs if error occurs)
 
 ---
 
-**[Previous: Module Basics](module-basics.md)** | **[Next: Creating Your Own Node.js Modules](index.md)**
+**[Previous: Module Basics](module-basics.md)** | **[Next: Advanced Modules](advanced-modules.md)**
 
