@@ -209,7 +209,7 @@ nginx-proxy-manager:
 
 - **No longer building from a Dockerfile**: Nginx Proxy Manager uses a pre-built image from Docker Hub
 - **No need for custom nginx configuration files**: The proxy manager handles configuration internally
-- **No need for the `nginx/` directory**: You can remove the custom nginx Dockerfile and configuration files
+- **No need for the `nginx/` directory**: Though I've chosen to still use it to keep the nginx related files stored in a seperate folder. **If you're using github, add this folder to the ignore list**.
 
 #### **Additional Ports**
 
