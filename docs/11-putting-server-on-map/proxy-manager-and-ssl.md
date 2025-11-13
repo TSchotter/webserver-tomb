@@ -315,11 +315,6 @@ After logging in, you'll see the Nginx Proxy Manager dashboard. Initially, it wi
 
 ![Initial dashboard](../images/nginxdashboard.png)
 
-The dashboard provides an overview of:
-- **Proxy Hosts**: Your configured domain-to-container mappings
-- **Redirection Hosts**: URL redirects you've set up
-- **Streams**: TCP/UDP stream configurations
-- **SSL Certificates**: Your SSL certificates (including Let's Encrypt certificates)
 
 ### Step 4: Obtaining an SSL Certificate
 
@@ -333,10 +328,8 @@ Before setting up your proxy host, let's obtain an SSL certificate for your doma
 ![Adding SSL certificate](../images/nginxcert.png)
 
 5. In the certificate creation form, you'll need to enter:
-   - **Domain Names**: Enter your domain name (e.g., `example.com`). If you want to include both `www` and non-`www` versions, you can add multiple domains: `example.com, www.example.com`
-   - **Email Address**: Enter your email address (used for certificate expiration notifications)
-   - **Agree to Terms of Service**: Check the box to agree to Let's Encrypt's terms
-
+   - **Domain Names**: Enter your domain name (e.g., `example.com`). If you want to include both `www` and non-`www` versions, you can add multiple domains: `example.com, www.example.com`. Hit "enter" to actually add in the domain name once you're done typing (don't click off of it). Clicking off the textbox will reset it.
+ 
 ![Creating certificate](../images/nginxcert_create.png)
 
 6. Click **"Save"** to request the certificate
