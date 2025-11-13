@@ -284,9 +284,164 @@ After updating your `docker-compose.yml`:
 
 The Nginx Proxy Manager interface will guide you through setting up your first proxy host and obtaining an SSL certificate. You'll be able to configure everything through the web interface without editing any configuration files.
 
-## Getting SSL Certificates and setting up proxy: 
+## Getting SSL Certificates and setting up proxy
 
-### TROY WILL ADD EXAMPLE IMAGES SHOWING HOW TO GET SSL CERTIFICATE AND SET PROXY TO NODEJS CONTAINER 
+Now that you have Nginx Proxy Manager running, let's set up SSL certificates and configure your proxy to route traffic to your Node.js server. This process involves two main steps:
+
+1. **Obtaining an SSL certificate** from Let's Encrypt
+2. **Configuring a proxy host** to route your domain to your Node.js container
+
+### Step 1: Accessing the Admin Interface
+
+First, navigate to the Nginx Proxy Manager admin interface. Open your web browser and go to:
+
+```
+http://your-server-ip:5001
+```
+
+Replace `your-server-ip` with your actual server's IP address.
+
+### Step 2: Creating Your Admin Account
+
+When you first access the admin interface, you'll be prompted to create an admin account. This account will be used to manage all your proxy configurations and SSL certificates.
+
+![Creating admin account](../images/nginxaccount.png)
+
+Enter your desired email address and password, then click "Sign In" to create your account and log in.
+
+### Step 3: Viewing the Dashboard
+
+After logging in, you'll see the Nginx Proxy Manager dashboard. Initially, it will be empty since you haven't configured any proxy hosts yet.
+
+![Initial dashboard](../images/nginxdashboard.png)
+
+The dashboard provides an overview of:
+- **Proxy Hosts**: Your configured domain-to-container mappings
+- **Redirection Hosts**: URL redirects you've set up
+- **Streams**: TCP/UDP stream configurations
+- **SSL Certificates**: Your SSL certificates (including Let's Encrypt certificates)
+
+### Step 4: Obtaining an SSL Certificate
+
+Before setting up your proxy host, let's obtain an SSL certificate for your domain. This ensures your site will be accessible via HTTPS.
+
+1. Click on the **"SSL Certificates"** tab in the top navigation
+2. Click the **"Add SSL Certificate"** button
+3. Select **"Let's Encrypt"** as the certificate type
+4. Choose **"Request a new SSL Certificate with Let's Encrypt"**
+
+![Adding SSL certificate](../images/nginxcert.png)
+
+5. In the certificate creation form, you'll need to enter:
+   - **Domain Names**: Enter your domain name (e.g., `example.com`). If you want to include both `www` and non-`www` versions, you can add multiple domains: `example.com, www.example.com`
+   - **Email Address**: Enter your email address (used for certificate expiration notifications)
+   - **Agree to Terms of Service**: Check the box to agree to Let's Encrypt's terms
+
+![Creating certificate](../images/nginxcert_create.png)
+
+6. Click **"Save"** to request the certificate
+
+Let's Encrypt will verify that you own the domain by checking that it points to your server. This process usually takes a few seconds to a minute. Make sure your domain's DNS records are properly configured (as described in the previous chapter) before requesting the certificate.
+
+### Step 5: Verifying Certificate Creation
+
+Once the certificate is successfully created, you'll see it listed in the SSL Certificates tab. The certificate will show:
+- Your domain name(s)
+- The expiration date (Let's Encrypt certificates are valid for 90 days and renew automatically)
+- The certificate status
+
+![Certificate created](../images/nginxcert_created.png)
+
+**Note**: Let's Encrypt certificates automatically renew before expiration, so you don't need to worry about manually renewing them.
+
+### Step 6: Setting Up Your Proxy Host
+
+Now that you have an SSL certificate, it's time to configure your proxy host to route traffic from your domain to your Node.js container.
+
+1. Click on the **"Hosts"** tab in the top navigation
+2. Click on **"Proxy Hosts"**
+3. Click the **"Add Proxy Host"** button
+
+![Adding proxy host](../images/nginxproxy.png)
+
+### Step 7: Configuring Proxy Host Details
+
+In the "Details" tab of the proxy host configuration, you'll need to enter:
+
+- **Domain Names**: Enter your domain name (the same one you used for the SSL certificate). For example: `example.com` or `www.example.com`. You can add multiple domains separated by commas if needed.
+
+- **Scheme**: Select **`http`** (not `https`). This is the protocol your Node.js container uses internally. Nginx Proxy Manager will handle the HTTPS encryption between the client and the proxy, then forward requests to your container over HTTP.
+
+- **Forward Hostname / IP**: Enter your **Node.js container name** (not the domain name!). This is the `container_name` you specified in your `docker-compose.yml` file. For example, if your container is named `backend-nodejs`, enter `backend-nodejs`.
+
+- **Forward Port**: Enter the port your Node.js server is listening on. This is typically `3000` (or whatever port you configured in your Node.js application's `PORT` environment variable).
+
+![Proxy host details](../images/nginxproxy_details.png)
+
+#### Additional Security Options
+
+While configuring the proxy host, you'll see several security and feature options. Two important ones to enable are:
+
+**Block Common Exploits**: This option enables nginx's built-in protection against common web exploits and attacks. It includes:
+- Protection against SQL injection attempts
+- Protection against cross-site scripting (XSS) attacks
+- Protection against common HTTP request smuggling attacks
+- Blocking of suspicious user agents and request patterns
+
+**Websocket Support**: Enable this if your application uses WebSockets (real-time bidirectional communication). Even if you're not currently using WebSockets, enabling this option won't hurt and will allow you to add WebSocket functionality later without reconfiguring the proxy. WebSockets are commonly used for:
+- Real-time chat applications
+- Live notifications
+- Real-time data updates
+- Interactive applications that need persistent connections
+
+Make sure both of these options are checked (enabled) for better security and functionality.
+
+### Step 8: Adding SSL to Your Proxy Host
+
+After configuring the basic proxy details, you need to add the SSL certificate you created earlier.
+
+1. Click on the **"SSL"** tab in the proxy host configuration popup
+2. Under "SSL Certificate", select the certificate you created in Step 4 from the dropdown menu
+3. **Enable "Force SSL"**: This option automatically redirects all HTTP traffic to HTTPS. When enabled, if someone tries to access your site using `http://example.com`, they'll be automatically redirected to `https://example.com`. This ensures all traffic to your site is encrypted.
+
+![Selecting SSL certificate](../images/nginxproxy_selectssl.png)
+
+4. Click **"Save"** to complete the proxy host configuration
+
+### Step 9: Verifying Your Configuration
+
+After saving, you'll be returned to the Proxy Hosts dashboard. You should now see your proxy host listed with:
+- Your domain name
+- The forwarding destination (your container name and port)
+- The SSL certificate status
+- Whether SSL is forced
+
+![Completed proxy configuration](../images/nginxproxy_completed.png)
+
+### Step 10: Testing Your HTTPS Site
+
+Now it's time to test that everything is working! Open your web browser and navigate to your domain:
+
+```
+https://your-domain.com
+```
+
+You should see:
+- **A padlock icon** in your browser's address bar
+- **"Secure" or "Connection is secure"** message
+- Your Node.js application loading correctly
+
+![Secured site](../images/secured_site.png)
+
+If you see the padlock icon, congratulations! Your site is now accessible via HTTPS with a valid SSL certificate.
+
+
+
+### What Happens Next?
+
+Your SSL certificate will automatically renew every 90 days. Nginx Proxy Manager handles this automatically, so you don't need to do anything. Your site will continue to work with HTTPS without interruption.
+
+You can add more proxy hosts for additional domains or subdomains by repeating the process above. Each proxy host can point to a different container or port, allowing you to host multiple applications on the same server.
 
 ---
 
