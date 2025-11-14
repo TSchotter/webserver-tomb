@@ -2,7 +2,7 @@
 layout: default
 title: User Authentication with Database
 nav_order: 2
-parent: Complex Database Integration
+# parent: Complex Database Integration
 nav_exclude: true
 ---
 

@@ -2,7 +2,7 @@
 layout: default
 title: IP-Based Login Lockout
 nav_order: 3
-parent: Complex Database Integration
+# parent: Complex Database Integration
 nav_exclude: true
 ---
 
