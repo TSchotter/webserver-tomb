@@ -2,7 +2,6 @@
 layout: default
 title: REST API Principles
 nav_order: 8
-has_children: true
 ---
 
 # REST API Principles

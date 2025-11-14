@@ -2,7 +2,6 @@
 layout: default
 title: NodeJS
 nav_order: 3
-has_children: true
 ---
 
 # Chapter 3 - NodeJS

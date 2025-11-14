@@ -2,7 +2,6 @@
 layout: default
 title: HTML and CSS
 nav_order: 2
-has_children: true
 ---
 
 # Chapter 2 - HTML and CSS
