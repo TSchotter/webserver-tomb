@@ -82,8 +82,13 @@ Ready to begin? Start with the setup guide:
 37. [Node.js Modules Overview](10-nodejs-modules/index.md)
 38. [Module Basics](10-nodejs-modules/module-basics.md)
 
+## Complex Database Integration
+
+39. [Complex Database Integration Overview](12-complex-database/index.md)
+40. [Password Requirements and Encryption](12-complex-database/password-encryption.md)
+
 ## Putting the Server on the Map
 
-39. [Putting the Server on the Map Overview](11-putting-server-on-map/index.md)
-40. [Getting a Domain Name](11-putting-server-on-map/getting-a-domain-name.md)
+43. [Putting the Server on the Map Overview](11-putting-server-on-map/index.md)
+44. [Getting a Domain Name](11-putting-server-on-map/getting-a-domain-name.md)
 

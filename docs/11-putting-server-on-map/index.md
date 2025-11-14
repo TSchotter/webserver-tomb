@@ -37,5 +37,5 @@ Start with [Getting a Domain Name](getting-a-domain-name.md) to learn how to pur
 
 ---
 
-**[Previous: Creating Your Own Node.js Modules](../10-nodejs-modules/index.md)** | **[Next: Getting a Domain Name](getting-a-domain-name.md)**
+**[Previous: Complex Database Integration](../12-complex-database/index.md)** | **[Next: Getting a Domain Name](getting-a-domain-name.md)**
 

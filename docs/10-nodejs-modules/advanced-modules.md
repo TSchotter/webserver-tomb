@@ -338,5 +338,5 @@ These patterns will help you write more maintainable and organized Node.js appli
 
 ---
 
-**[Previous: Middleware Modules](middleware-modules.md)** | **[Next: Putting the Server on the Map](../11-putting-server-on-map/index.md)**
+**[Previous: Middleware Modules](middleware-modules.md)** | **[Next: Complex Database Integration](../12-complex-database/index.md)**
 
