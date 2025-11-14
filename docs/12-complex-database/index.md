@@ -2,6 +2,7 @@
 layout: default
 title: Complex Database Integration
 nav_order: 12
+has_children: true
 ---
 
 # Complex Database Integration
