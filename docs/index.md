@@ -87,6 +87,11 @@ Ready to begin? Start with the setup guide:
 39. [Complex Database Integration Overview](12-complex-database/index.md)
 40. [Password Requirements and Encryption](12-complex-database/password-encryption.md)
 
+## Website Email
+
+41. [Website Email Overview](13-website-email/index.md)
+42. [Sending Emails with Gmail](13-website-email/sending-emails-with-gmail.md)
+
 ## Putting the Server on the Map
 
 43. [Putting the Server on the Map Overview](11-putting-server-on-map/index.md)
