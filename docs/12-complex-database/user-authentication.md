@@ -2,8 +2,7 @@
 layout: default
 title: User Authentication with Database
 nav_order: 2
-# parent: Complex Database Integration
-nav_exclude: true
+parent: Complex Database Integration
 ---
 
 # User Authentication with Database
@@ -91,7 +90,18 @@ function requireAuth(req, res, next) {
   if (req.session && req.session.userId) {
     next();
   } else {
-    res.status(401).json({ error: 'Authentication required' });
+    res.status(401).send(`
+      <!DOCTYPE html>
+      <html>
+      <head><title>Authentication Required</title></head>
+      <body>
+        <h1>Authentication Required</h1>
+        <p>You must be logged in to access this page.</p>
+        <p><a href="/api/auth/login">Login here</a></p>
+        <p><a href="/">← Back to Home</a></p>
+      </body>
+      </html>
+    `);
   }
 }
 
@@ -102,16 +112,196 @@ module.exports = {
 
 This middleware will be used to protect routes that require login.
 
-## Step 4: Create Authentication Routes
+## Step 4: Create Static HTML Pages
 
-Create `routes/auth.js` to handle registration, login, and logout:
+Create a `public` directory and add the following HTML files for our authentication pages. This can be replaced with the handlebars middleware if nessessary.
+
+### Create the Public Directory
+
+```bash
+mkdir public
+```
+
+### Registration Page (`public/register.html`)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+</head>
+<body>
+  <h1>Register New User</h1>
+  <div>
+    <strong>Password Requirements:</strong>
+    <ul>
+      <li>At least 8 characters long</li>
+      <li>At least one uppercase letter</li>
+      <li>At least one lowercase letter</li>
+      <li>At least one number</li>
+      <li>At least one special character</li>
+    </ul>
+  </div>
+  <form method="POST" action="/api/auth/register">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Register</button>
+  </form>
+  <p><a href="/api/auth/login">Already have an account? Login here</a></p>
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
+```
+
+### Login Page (`public/login.html`)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form method="POST" action="/api/auth/login">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+  <p><a href="/api/auth/register">Don't have an account? Register here</a></p>
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
+```
+
+### Success/Error Pages
+
+Create these simple pages for displaying messages:
+
+**Registration Success (`public/register-success.html`)**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Successful</title>
+</head>
+<body>
+  <h1>Registration Successful!</h1>
+  <p id="message">User has been registered successfully.</p>
+  <p><a href="/api/auth/login">Login here</a></p>
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
+```
+
+**Login Success (`public/login-success.html`)**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login Successful</title>
+</head>
+<body>
+  <h1>Login Successful!</h1>
+  <p id="message">Welcome!</p>
+  <p><a href="/api/auth/me">View your profile</a></p>
+  <p><a href="/api/auth/logout">Logout</a></p>
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
+```
+
+**Error Page (`public/error.html`)**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+</head>
+<body>
+  <h1>Error</h1>
+  <p id="message">An error occurred.</p>
+  <a href="/" id="back-link">← Back to Home</a>
+</body>
+</html>
+```
+
+**User Profile Page (`public/profile.html`)**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+</head>
+<body>
+  <h1>User Profile</h1>
+  <div id="user-info">
+    <div><strong>Loading...</strong></div>
+  </div>
+  <p><a href="/api/auth/logout">Logout</a></p>
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
+```
+
+**Logged Out Page (`public/logged-out.html`)**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Logged Out</title>
+</head>
+<body>
+  <h1>Logged Out Successfully</h1>
+  <p>You have been logged out.</p>
+  <p><a href="/api/auth/login">Login again</a></p>
+  <p><a href="/">← Back to Home</a></p>
+</body>
+</html>
+```
+
+## Step 5: Create Authentication Routes
+
+Create `routes/auth.js` to handle registration, login, and logout. The routes will serve static HTML files and handle form submissions:
 
 ```javascript
 // routes/auth.js
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 const db = require('../database');
 const { validatePassword, hashPassword, comparePassword } = require('../modules/password-utils');
+
+/**
+ * GET /register - Show registration form
+ */
+router.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/register.html'));
+});
 
 /**
  * POST /register - Register a new user
@@ -122,26 +312,20 @@ router.post('/register', async (req, res) => {
     
     // Validate input
     if (!username || !password) {
-      return res.status(400).json({ 
-        error: 'Username and password are required' 
-      });
+      return res.redirect('/api/auth/register?error=' + encodeURIComponent('Username and password are required'));
     }
     
     // Validate password requirements
     const validation = validatePassword(password);
     if (!validation.valid) {
-      return res.status(400).json({
-        error: 'Password does not meet requirements',
-        errors: validation.errors
-      });
+      const errorsText = validation.errors.join(', ');
+      return res.redirect('/api/auth/register?error=' + encodeURIComponent('Password does not meet requirements: ' + errorsText));
     }
     
     // Check if username already exists
     const existingUser = db.prepare('SELECT id FROM users WHERE username = ?').get(username);
     if (existingUser) {
-      return res.status(409).json({ 
-        error: 'Username already exists' 
-      });
+      return res.redirect('/api/auth/register?error=' + encodeURIComponent('Username already exists. Please choose a different username.'));
     }
     
     // Hash the password before storing
@@ -151,15 +335,20 @@ router.post('/register', async (req, res) => {
     const stmt = db.prepare('INSERT INTO users (username, password_hash) VALUES (?, ?)');
     const result = stmt.run(username, passwordHash);
     
-    res.status(201).json({
-      message: 'User registered successfully',
-      userId: result.lastInsertRowid
-    });
+    // Redirect to success page with username
+    res.redirect(`/public/register-success.html?username=${encodeURIComponent(username)}&userId=${result.lastInsertRowid}`);
     
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.redirect('/public/error.html?message=' + encodeURIComponent('An internal server error occurred. Please try again later.') + '&back=/api/auth/register');
   }
+});
+
+/**
+ * GET /login - Show login form
+ */
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 
 /**
@@ -171,9 +360,7 @@ router.post('/login', async (req, res) => {
     
     // Validate input
     if (!username || !password) {
-      return res.status(400).json({ 
-        error: 'Username and password are required' 
-      });
+      return res.redirect('/api/auth/login?error=' + encodeURIComponent('Username and password are required'));
     }
     
     // Find user by username
@@ -181,18 +368,14 @@ router.post('/login', async (req, res) => {
     
     if (!user) {
       // Don't reveal if username exists (security best practice)
-      return res.status(401).json({ 
-        error: 'Invalid username or password' 
-      });
+      return res.redirect('/api/auth/login?error=' + encodeURIComponent('Invalid username or password'));
     }
     
     // Compare entered password with stored hash
     const passwordMatch = await comparePassword(password, user.password_hash);
     
     if (!passwordMatch) {
-      return res.status(401).json({ 
-        error: 'Invalid username or password' 
-      });
+      return res.redirect('/api/auth/login?error=' + encodeURIComponent('Invalid username or password'));
     }
     
     // Successful login - update last login time
@@ -204,30 +387,38 @@ router.post('/login', async (req, res) => {
     req.session.username = user.username;
     req.session.isLoggedIn = true;
     
-    res.json({
-      message: 'Login successful',
-      user: {
-        id: user.id,
-        username: user.username
-      }
-    });
+    // Redirect to success page
+    res.redirect(`/public/login-success.html?username=${encodeURIComponent(user.username)}`);
     
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.redirect('/public/error.html?message=' + encodeURIComponent('An internal server error occurred. Please try again later.') + '&back=/api/auth/login');
   }
 });
 
 /**
- * POST /logout - Logout user
+ * GET /logout - Logout user (GET version for easy link access)
+ */
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Logout error:', err);
+      return res.redirect('/public/error.html?message=' + encodeURIComponent('An error occurred while logging out.') + '&back=/');
+    }
+    res.redirect('/public/logged-out.html');
+  });
+});
+
+/**
+ * POST /logout - Logout user (POST version)
  */
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error('Logout error:', err);
-      return res.status(500).json({ error: 'Error logging out' });
+      return res.redirect('/public/error.html?message=' + encodeURIComponent('An error occurred while logging out.') + '&back=/');
     }
-    res.json({ message: 'Logged out successfully' });
+    res.redirect('/public/logged-out.html');
   });
 });
 
@@ -236,17 +427,25 @@ router.post('/logout', (req, res) => {
  */
 router.get('/me', (req, res) => {
   if (!req.session || !req.session.userId) {
-    return res.status(401).json({ error: 'Not authenticated' });
+    return res.redirect('/public/error.html?message=' + encodeURIComponent('You must be logged in to view this page.') + '&back=/api/auth/login');
   }
   
   const user = db.prepare('SELECT id, username, created_at, last_login FROM users WHERE id = ?')
     .get(req.session.userId);
   
   if (!user) {
-    return res.status(404).json({ error: 'User not found' });
+    return res.redirect('/public/error.html?message=' + encodeURIComponent('User not found in database.') + '&back=/');
   }
   
-  res.json({ user });
+  // Pass user data as query parameters to the profile page
+  const params = new URLSearchParams({
+    id: user.id,
+    username: user.username,
+    created_at: user.created_at || 'N/A',
+    last_login: user.last_login || 'Never'
+  });
+  
+  res.redirect(`/public/profile.html?${params.toString()}`);
 });
 
 module.exports = router;
@@ -271,6 +470,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Session configuration with SQLite store (from Chapter 10)
 const sessionStore = new SQLiteStore({
@@ -292,30 +492,17 @@ app.use(session({
 // Routes
 app.use('/api/auth', authRoutes);
 
-// Protected route example
+// Protected route example (doing this manually by sending)
 app.get('/api/protected', requireAuth, (req, res) => {
-  res.json({
-    message: 'This is a protected route',
-    user: {
-      id: req.session.userId,
-      username: req.session.username
-    }
-  });
-});
-
-// Health check route
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.send(`Protected route that needs authentication. User: ${req.session.username} ID: ${req.session.userId}`);
 });
 
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Register: POST http://localhost:${PORT}/api/auth/register`);
-  console.log(`Login: POST http://localhost:${PORT}/api/auth/login`);
 });
 
-// Graceful shutdown
+// Graceful shutdown, this will help the session to close the db gracefully since we're now using it.
 process.on('SIGINT', () => {
   console.log('\nShutting down gracefully...');
   sessionStore.close();
@@ -356,215 +543,8 @@ Notice that both "user not found" and "wrong password" return the same error mes
 - Doesn't give attackers hints about which part was wrong
 - Slows down brute-force attacks
 
-## Step 6: Testing the Authentication System
-
-### Test Registration
-
-```bash
-# Register a new user with a valid password
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"username":"testuser","password":"Test123!@#"}'
-```
-
-**Expected response:**
-```json
-{
-  "message": "User registered successfully",
-  "userId": 1
-}
-```
-
-**Test with invalid password:**
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"username":"testuser2","password":"weak"}'
-```
-
-**Expected response:**
-```json
-{
-  "error": "Password does not meet requirements",
-  "errors": [
-    "Password must be at least 8 characters long",
-    "Password must contain at least one uppercase letter",
-    "Password must contain at least one number",
-    "Password must contain at least one special character"
-  ]
-}
-```
-
-**Test with duplicate username:**
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"username":"testuser","password":"Another123!@#"}'
-```
-
-**Expected response:**
-```json
-{
-  "error": "Username already exists"
-}
-```
-
-### Test Login
-
-```bash
-# Successful login
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username":"testuser","password":"Test123!@#"}' \
-  -c cookies.txt
-```
-
-**Expected response:**
-```json
-{
-  "message": "Login successful",
-  "user": {
-    "id": 1,
-    "username": "testuser"
-  }
-}
-```
-
-**Test with wrong password:**
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username":"testuser","password":"wrong"}'
-```
-
-**Expected response:**
-```json
-{
-  "error": "Invalid username or password"
-}
-```
-
-**Test with non-existent username:**
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username":"nonexistent","password":"Test123!@#"}'
-```
-
-**Expected response:**
-```json
-{
-  "error": "Invalid username or password"
-}
-```
-
-### Test Protected Route
-
-```bash
-# Get current user info (requires session cookie from login)
-curl -X GET http://localhost:3000/api/auth/me \
-  -b cookies.txt
-```
-
-**Expected response (if logged in):**
-```json
-{
-  "user": {
-    "id": 1,
-    "username": "testuser",
-    "created_at": "2024-01-15 10:30:00",
-    "last_login": "2024-01-15 11:45:00"
-  }
-}
-```
-
-**Expected response (if not logged in):**
-```json
-{
-  "error": "Not authenticated"
-}
-```
-
-### Test Logout
-
-```bash
-curl -X POST http://localhost:3000/api/auth/logout \
-  -b cookies.txt
-```
-
-**Expected response:**
-```json
-{
-  "message": "Logged out successfully"
-}
-```
-
-## Understanding Password Comparison
-
-When a user logs in, here's what happens:
-
-1. **User submits password**: `"MyPassword123!"`
-2. **Server retrieves hash**: `"$2b$10$N9qo8uLOickgx2ZMRZoMye..."`
-3. **bcrypt compares**: 
-   - Takes the submitted password
-   - Extracts the salt from the stored hash
-   - Hashes the submitted password with that salt
-   - Compares the result with the stored hash
-4. **Returns true/false**: Whether they match
-
-**Key point:** bcrypt's `comparePassword` function handles all of this automatically. You never need to manually extract salts or compare hashes - bcrypt does it securely for you.
-
-## Database Security Considerations
-
-1. **Never store plain text passwords**: Always hash before storing
-2. **Use prepared statements**: Prevents SQL injection (already done in examples)
-3. **Unique usernames**: The `UNIQUE` constraint prevents duplicate accounts
-4. **Index on username**: SQLite automatically creates an index for UNIQUE columns, making lookups fast
-
-## Common Issues and Solutions
-
-### Issue: "Username already exists" even for new users
-
-**Solution:** Check if you're reusing the same database file. Delete `app.db` to start fresh, or check existing users:
-```bash
-sqlite3 app.db "SELECT username FROM users;"
-```
-
-### Issue: Passwords don't match even when correct
-
-**Solution:** Make sure you're using `await` with async functions:
-```javascript
-// CORRECT
-const match = await comparePassword(password, hash);
-
-// WRONG - returns a Promise, not a boolean
-const match = comparePassword(password, hash);
-```
-
-### Issue: Session not persisting
-
-**Solution:** Make sure you're sending cookies with requests:
-```bash
-# Save cookies
-curl ... -c cookies.txt
-
-# Use cookies
-curl ... -b cookies.txt
-```
-
-## Summary
-
-You've now learned how to:
-- Create a users table in SQLite3
-- Store encrypted passwords in the database
-- Register new users with password validation
-- Authenticate users by comparing passwords
-- Create sessions for logged-in users
-- Protect routes with authentication middleware
-
-In the next subchapter, we'll add IP-based login attempt tracking to prevent brute-force attacks.
-
 ---
 
 **[Previous: Complex Database Integration](index.md)** | **[Next: Putting the Server on the Map](../11-putting-server-on-map/index.md)**
+
 
