@@ -34,5 +34,5 @@ Start with [Sending Emails with Gmail](sending-emails-with-gmail.md) to learn ho
 
 ---
 
-**[Previous: Complex Database Integration](../12-complex-database/index.md)** | **[Next: Sending Emails with Gmail](sending-emails-with-gmail.md)**
+**[Previous: Complex Database Integration](../12-complex-database/index.md)** | **[Next: Real-Time Communication with Socket.IO](../14-socket-io/index.md)**
 
