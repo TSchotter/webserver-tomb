@@ -16,7 +16,7 @@ Socket.IO is a JavaScript library that enables real-time, bidirectional communic
 ### Why Use Socket.IO?
 
 **Traditional HTTP (Request-Response):**
-- Client sends a request -> Server responds -> Connection closes
+- Client sends a request → Server responds → Connection closes
 - Client must constantly poll the server to check for updates
 - Inefficient for real-time features
 
