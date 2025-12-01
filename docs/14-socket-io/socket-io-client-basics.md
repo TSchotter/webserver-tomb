@@ -211,70 +211,10 @@ To test this client, you'll need a Socket.IO server running. **You only need ONE
 
 This does not mean that you *can't* seperate the tasks (and place the socket server on another port). But keep in mind that if you're relying on session information (or user information), the socket server will also need to authenticate messages by the client on its own.
 
-Here's how to add Socket.IO to your existing Express server:
-
-```javascript
-// server.js
-const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-});
-
-// Serve static files (your HTML page)
-app.use(express.static('public'));
-
-// Handle Socket.IO connections
-io.on('connection', (socket) => {
-    console.log('Client connected:', socket.id);
-
-    // Listen for 'requestData' event from client
-    socket.on('requestData', (data) => {
-        console.log('Received from client:', data);
-
-        // Send a JSON response back to the client
-        socket.emit('response', {
-            success: true,
-            message: 'Data received successfully!',
-            receivedData: data,
-            serverTime: new Date().toISOString(),
-            serverMessage: 'Hello from the server!'
-        });
-    });
-
-    // Handle disconnection
-    socket.on('disconnect', () => {
-        console.log('Client disconnected:', socket.id);
-    });
-});
-
-const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`Server running on http://[domain name]`);
-});
-```
-
-**To run the server:**
-```bash
-npm install express socket.io
-node server.js
-```
-
-Then open your HTML page in a browser and click the button to see the JSON response from the server!
 
 ### Adding Socket.IO to Your Existing Express Server
 
-If you already have an Express server, you can add Socket.IO to it. Here's how to modify your existing `server.js`:
-
 ```javascript
-// Your existing Express server
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
