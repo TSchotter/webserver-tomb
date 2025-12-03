@@ -38,7 +38,11 @@ We'll cover both approaches, starting with the official method which is simpler 
 
 ## Method 1: Official Method (Recommended)
 
-This is the official method recommended by Socket.IO. It's simple and doesn't require any additional packages.
+This is the official method recommended by Socket.IO. 
+
+https://socket.io/how-to/use-with-express-session
+
+It's simple and doesn't require any additional packages.
 
 ### Step 1: Install Required Packages
 
