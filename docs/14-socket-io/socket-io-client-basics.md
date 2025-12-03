@@ -52,7 +52,7 @@ You can include Socket.IO in your HTML page using a CDN (Content Delivery Networ
     <div id="response"></div>
 
     <!-- Include Socket.IO client library -->
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script>
         // Your Socket.IO code will go here
     </script>
@@ -147,7 +147,7 @@ Here's a complete HTML page that demonstrates Socket.IO client-side communicatio
     </div>
 
     <!-- Include Socket.IO client library -->
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <script>
         // Connect to the Socket.IO server
         const socket = io('http://[domain name]');

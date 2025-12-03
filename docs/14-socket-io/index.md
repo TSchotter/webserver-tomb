@@ -20,6 +20,7 @@ In this chapter, you'll learn how to use Socket.IO to create real-time, bidirect
 ## Chapter Contents
 
 1. **[Socket.IO Client Basics](socket-io-client-basics.md)** - Learn how to set up Socket.IO on the client side and receive JSON responses from the server
+2. **[Connecting Express-Session to Socket.IO](socket-io-sessions.md)** - Learn how to share session data between Express routes and Socket.IO connections for authentication and user identification
 
 ## Prerequisites
 
