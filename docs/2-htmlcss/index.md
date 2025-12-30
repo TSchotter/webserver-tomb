@@ -1,0 +1,27 @@
+---
+layout: default
+title: HTML and CSS
+nav_order: 2
+---
+
+# Chapter 2 - HTML and CSS
+
+[&laquo; Return to the Table of Contents](../index.md)
+
+Now that things are set up, it's time to talk a little bit about HTML and CSS. These subchapters will not go deep into these concepts since this is the web`server` class. But a certain amount of HTML and CSS knowledge will help you understand what sort of information you're frequently providing to the client.
+
+For more information, I highly recommend [w3schools](https://www.w3schools.com/). They have plenty of resources for learning about HTML and CSS tag/style usage.
+
+## HTML and CSS subchapters
+
+### 1. [What is HTML?](whatisHTML.md)
+
+Learn about HTML from a webserver developer's perspective - how information flows from server to client, security considerations, and the request-response cycle.
+
+### 2. [HTML Tags and Structure](htmlTags.md)
+
+Learn about the essential HTML tags, attributes, and structure needed to create web content that servers deliver to clients.
+
+### 3. [CSS Basics](CSSstart.md)
+
+Understand CSS fundamentals including selectors, properties, layout techniques, and the priority system for styling web content.
